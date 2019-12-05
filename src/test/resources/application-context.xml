@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.ehabibov.context"/>
+    <bean id="propertyConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+                <value>classpath:browsers/*.properties</value>
+            </list>
+        </property>
+        <property name="nullValue" value="nil"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <bean id="chromeBinaryConfig" class="com.ehabibov.driver.binary.ChromeBinaryConfig" lazy-init="true"
+          c:driverBinaryFolder="${chrome.binary.folder.path}"
+          c:desiredDriverVersion="${chrome.binary.target.version:nil}"
+          c:desiredDriverPlatform="${chrome.binary.target.platform:LINUX}"
+          c:desiredBinaryArchitecture="${chrome.binary.target.architecture:X64}"
+          c:targetBrowserPath="${chrome.binary.browser.path:nil}"
+          c:binaryDownloadTimeout="${chrome.binary.download.timeout.seconds:10}"
+          c:driverVersionAsJavaPreferenceTtl="${chrome.binary.jvm.preference.ttl.seconds:3600}"
+          c:binariesRepositoryUrl="${chrome.binary.custom.repository.url:nil}"
+          c:gitHubTokenName="${chrome.binary.download.github.token.name:nil}"
+          c:getGitHubTokenSecret="${chrome.binary.download.github.token.secret:nil}"
+          c:proxySocket="${chrome.binary.download.proxy.socket:nil}"
+          c:proxyUser="${chrome.binary.download.proxy.user:nil}"
+          c:proxyPass="${chrome.binary.download.proxy.pass:nil}"/>
+
+    <bean id="firefoxBinaryConfig" class="com.ehabibov.driver.binary.FirefoxBinaryConfig" lazy-init="true"
+          c:driverBinaryFolder="${firefox.binary.folder.path}"
+          c:desiredDriverVersion="${firefox.binary.target.version:nil}"
+          c:desiredDriverPlatform="${firefox.binary.target.platform:LINUX}"
+          c:desiredBinaryArchitecture="${firefox.binary.target.architecture:X64}"
+          c:targetBrowserPath="${firefox.binary.browser.path:nil}"
+          c:binaryDownloadTimeout="${firefox.binary.download.timeout.seconds:10}"
+          c:driverVersionAsJavaPreferenceTtl="${firefox.binary.jvm.preference.ttl.seconds:3600}"
+          c:binariesRepositoryUrl="${firefox.binary.custom.repository.url:nil}"
+          c:gitHubTokenName="${firefox.binary.download.github.token.name:nil}"
+          c:getGitHubTokenSecret="${firefox.binary.download.github.token.secret:nil}"
+          c:proxySocket="${firefox.binary.download.proxy.socket:nil}"
+          c:proxyUser="${firefox.binary.download.proxy.user:nil}"
+          c:proxyPass="${firefox.binary.download.proxy.pass:nil}"/>
+
+    <bean id="ieBinaryConfig" class="com.ehabibov.driver.binary.IeBinaryConfig" lazy-init="true"
+          c:driverBinaryFolder="${ie.binary.folder.path}"
+          c:desiredDriverVersion="${ie.binary.target.version:nil}"
+          c:desiredDriverPlatform="${ie.binary.target.platform:LINUX}"
+          c:desiredBinaryArchitecture="${ie.binary.target.architecture:X64}"
+          c:targetBrowserPath="${ie.binary.browser.path:nil}"
+          c:binaryDownloadTimeout="${ie.binary.download.timeout.seconds:10}"
+          c:driverVersionAsJavaPreferenceTtl="${ie.binary.jvm.preference.ttl.seconds:3600}"
+          c:binariesRepositoryUrl="${ie.binary.custom.repository.url:nil}"
+          c:gitHubTokenName="${ie.binary.download.github.token.name:nil}"
+          c:getGitHubTokenSecret="${ie.binary.download.github.token.secret:nil}"
+          c:proxySocket="${ie.binary.download.proxy.socket:nil}"
+          c:proxyUser="${ie.binary.download.proxy.user:nil}"
+          c:proxyPass="${ie.binary.download.proxy.pass:nil}"/>
+
+    <bean id="edgeBinaryConfig" class="com.ehabibov.driver.binary.EdgeBinaryConfig" lazy-init="true"
+          c:driverBinaryFolder="${edge.binary.folder.path}"
+          c:desiredDriverVersion="${edge.binary.target.version:nil}"
+          c:desiredDriverPlatform="${edge.binary.target.platform:LINUX}"
+          c:desiredBinaryArchitecture="${edge.binary.target.architecture:X64}"
+          c:targetBrowserPath="${edge.binary.browser.path:nil}"
+          c:binaryDownloadTimeout="${edge.binary.download.timeout.seconds:10}"
+          c:driverVersionAsJavaPreferenceTtl="${edge.binary.jvm.preference.ttl.seconds:3600}"
+          c:binariesRepositoryUrl="${edge.binary.custom.repository.url:nil}"
+          c:gitHubTokenName="${edge.binary.download.github.token.name:nil}"
+          c:getGitHubTokenSecret="${edge.binary.download.github.token.secret:nil}"
+          c:proxySocket="${edge.binary.download.proxy.socket:nil}"
+          c:proxyUser="${edge.binary.download.proxy.user:nil}"
+          c:proxyPass="${edge.binary.download.proxy.pass:nil}"/>
+
+    <bean id="operaBinaryConfig" class="com.ehabibov.driver.binary.OperaBinaryConfig" lazy-init="true"
+          c:driverBinaryFolder="${opera.binary.folder.path}"
+          c:desiredDriverVersion="${opera.binary.target.version:nil}"
+          c:desiredDriverPlatform="${opera.binary.target.platform:LINUX}"
+          c:desiredBinaryArchitecture="${opera.binary.target.architecture:X64}"
+          c:targetBrowserPath="${opera.binary.browser.path:nil}"
+          c:binaryDownloadTimeout="${opera.binary.download.timeout.seconds:10}"
+          c:driverVersionAsJavaPreferenceTtl="${opera.binary.jvm.preference.ttl.seconds:3600}"
+          c:binariesRepositoryUrl="${opera.binary.custom.repository.url:nil}"
+          c:gitHubTokenName="${opera.binary.download.github.token.name:nil}"
+          c:getGitHubTokenSecret="${opera.binary.download.github.token.secret:nil}"
+          c:proxySocket="${opera.binary.download.proxy.socket:nil}"
+          c:proxyUser="${opera.binary.download.proxy.user:nil}"
+          c:proxyPass="${opera.binary.download.proxy.pass:nil}"/>
+
+    <bean id="safariBinaryConfig" class="com.ehabibov.driver.binary.SafariBinaryConfig" lazy-init="true"
+          c:driverBinaryFolder="${safari.binary.folder.path}"/>
+
+
+    <bean id="chromeDriverConfig" class="com.ehabibov.driver.config.ChromeDriverConfig" lazy-init="true"
+          c:port="${chrome.driver.port}"
+          c:startArguments="#{'${chrome.start.arguments}'.split(',')}"/>
+
+    <bean id="firefoxDriverConfig" class="com.ehabibov.driver.config.FirefoxDriverConfig" lazy-init="true"
+          c:port="${firefox.driver.port}"
+          c:startArguments="#{'${firefox.start.arguments}'.split(',')}"/>
+
+    <bean id="safariDriverConfig" class="com.ehabibov.driver.config.SafariDriverConfig" lazy-init="true"
+          c:port="${safari.driver.port}"
+          c:startArguments="#{'${safari.start.arguments}'.split(',')}"/>
+
+    <bean id="ieDriverConfig" class="com.ehabibov.driver.config.IeDriverConfig" lazy-init="true"
+          c:port="${ie.driver.port}"
+          c:startArguments="#{'${ie.start.arguments}'.split(',')}"/>
+
+    <bean id="edgeDriverConfig" class="com.ehabibov.driver.config.EdgeDriverConfig" lazy-init="true"
+          c:port="${edge.driver.port}"
+          c:startArguments="#{'${edge.start.arguments}'.split(',')}"/>
+
+    <bean id="operaDriverConfig" class="com.ehabibov.driver.config.OperaDriverConfig" lazy-init="true"
+          c:port="${opera.driver.port}"
+          c:startArguments="#{'${opera.start.arguments}'.split(',')}"/>
+
+
+    <bean id="chromeDriverManager" class="com.ehabibov.driver.manager.ChromeDriverManager"
+          p:chromeBinaryConfig-ref="chromeBinaryConfig"
+          p:chromeDriverConfig-ref="chromeDriverConfig"/>
+
+    <bean id="firefoxDriverManager" class="com.ehabibov.driver.manager.FirefoxDriverManager"
+          p:firefoxBinaryConfig-ref="firefoxBinaryConfig"
+          p:firefoxDriverConfig-ref="firefoxDriverConfig"/>
+
+    <bean id="safariDriverManager" class="com.ehabibov.driver.manager.SafariDriverManager"
+          p:safariBinaryConfig-ref="safariBinaryConfig"
+          p:safariDriverConfig-ref="safariDriverConfig"/>
+
+    <bean id="ieDriverManager" class="com.ehabibov.driver.manager.IeDriverManager"
+          p:ieBinaryConfig-ref="ieBinaryConfig"
+          p:ieDriverConfig-ref="ieDriverConfig"/>
+
+    <bean id="edgeDriverManager" class="com.ehabibov.driver.manager.EdgeDriverManager"
+          p:edgeBinaryConfig-ref="edgeBinaryConfig"
+          p:edgeDriverConfig-ref="edgeDriverConfig"/>
+
+    <bean id="operaDriverManager" class="com.ehabibov.driver.manager.OperaDriverManager"
+          p:operaBinaryConfig-ref="operaBinaryConfig"
+          p:operaDriverConfig-ref="operaDriverConfig"/>
+
+    <bean name="webDriver" class="com.ehabibov.driver.manager.DriverManagerFactory" init-method="getObject"
+         p:driverType="${browser}"
+         p:chromeDriverManager-ref="chromeDriverManager"
+         p:firefoxDriverManager-ref="firefoxDriverManager"
+         p:safariDriverManager-ref="safariDriverManager"
+         p:ieDriverManager-ref="ieDriverManager"
+         p:edgeDriverManager-ref="edgeDriverManager"
+         p:operaDriverManager-ref="operaDriverManager"/>
+
+    <bean id="refreshListener" class="com.ehabibov.context.listeners.AppEventOnRefresh"/>
+    <bean id="startupListener" class="com.ehabibov.context.listeners.AppEventOnStartup"/>
+    <bean id="contextProvider" class="com.ehabibov.context.ApplicationContextProvider"/>
+
+</beans>
