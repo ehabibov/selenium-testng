@@ -1,10 +1,9 @@
 package com.ehabibov.driver.manager;
 
-import com.ehabibov.driver.DriverType;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.FactoryBean;
+import com.ehabibov.driver.DriverType;
 
-public class DriverManagerFactory implements FactoryBean<WebDriver> {
+public class DriverManagerFactory implements FactoryBean<DriverManager> {
 
     public DriverType driverType;
     public ChromeDriverManager chromeDriverManager;
@@ -15,7 +14,7 @@ public class DriverManagerFactory implements FactoryBean<WebDriver> {
     public OperaDriverManager operaDriverManager;
 
     @Override
-    public WebDriver getObject() {
+    public DriverManager getObject() {
         DriverManager driverManager;
         switch (driverType) {
             case CHROME:
@@ -39,7 +38,7 @@ public class DriverManagerFactory implements FactoryBean<WebDriver> {
             default:
                 throw new NullPointerException();
         }
-        return driverManager.getDriver();
+        return driverManager;
     }
 
     @Override

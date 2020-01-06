@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import com.ehabibov.context.ApplicationContextProvider;
+import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.locators.LocatorRepository;
 
 public abstract class AbstractPage {
@@ -14,6 +15,7 @@ public abstract class AbstractPage {
     private static final Logger log = LoggerFactory.getLogger(AbstractPage.class);
 
     protected ApplicationContext context;
+    protected DriverManager manager;
     protected WebDriver driver;
 
     public AbstractPage(){
@@ -22,7 +24,9 @@ public abstract class AbstractPage {
 
     void initDriver(){
         this.context = ApplicationContextProvider.getApplicationContext();
-        this.driver = (WebDriver) context.getBean("webDriver");
+        manager = (DriverManager) context.getBean("driverManager");
+        this.driver = manager.getDriver();
+
     }
 
     void initPage(WebDriver driver, LocatorRepository locatorRepository){

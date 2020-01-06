@@ -146,7 +146,7 @@
           p:operaBinaryConfig-ref="operaBinaryConfig"
           p:operaDriverConfig-ref="operaDriverConfig"/>
 
-    <bean name="webDriver" class="com.ehabibov.driver.manager.DriverManagerFactory" init-method="getObject"
+    <bean name="driverManager" class="com.ehabibov.driver.manager.DriverManagerFactory" init-method="getObject"
          p:driverType="${browser}"
          p:chromeDriverManager-ref="chromeDriverManager"
          p:firefoxDriverManager-ref="firefoxDriverManager"
