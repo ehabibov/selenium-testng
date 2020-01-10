@@ -4,13 +4,10 @@
         <listener class-name="com.ehabibov.listeners.SeleniumSuiteListener"/>
     </listeners>
     <test name="Test1">
+        <parameter name="username" value="user"/>
+        <parameter name="password" value="bitnami"/>
         <classes>
-            <class name="com.ehabibov.tests.MyTest1"/>
-        </classes>
-    </test>
-    <test name="Test2">
-        <classes>
-            <class name="com.ehabibov.tests.MyTest2"/>
+            <class name="com.ehabibov.tests.LoginTest"/>
         </classes>
     </test>
 </suite>

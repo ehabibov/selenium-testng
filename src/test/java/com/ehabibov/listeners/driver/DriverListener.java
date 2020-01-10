@@ -7,15 +7,22 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import java.util.Arrays;
+
 public class DriverListener extends AbstractWebDriverEventListener {
 
     private static final Logger log = LoggerFactory.getLogger(DriverListener.class);
 
     @Override
-    public void afterClickOn(WebElement element, WebDriver driver) {
+    public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
+        log.info(String.format("Sending keys: %s", Arrays.toString(keysToSend)));
+    }
+
+    @Override
+    public void beforeClickOn(WebElement element, WebDriver driver) {
         String attributes = this.getTemplate(element);
         String attributesJs = this.getAttributesByJavascript(element, driver);
-        log.info(String.format("Clicked on: element%s attributes%s", attributes, attributesJs));
+        log.info(String.format("Clicking on: element%s attributes%s", attributes, attributesJs));
     }
 
     private String getTemplate(WebElement element){
