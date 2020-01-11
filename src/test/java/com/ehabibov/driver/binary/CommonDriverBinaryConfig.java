@@ -1,17 +1,18 @@
 package com.ehabibov.driver.binary;
 
 import io.github.bonigarcia.wdm.Architecture;
+import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.OperatingSystem;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class OperaBinaryConfig {
+public class CommonDriverBinaryConfig implements DriverBinaryConfig {
 
     private WebDriverManager manager;
 
+    private String browserType;
     private String driverBinaryFolder;
     private String desiredDriverPlatform;
     private String desiredDriverVersion;
@@ -26,12 +27,14 @@ public class OperaBinaryConfig {
     private String proxyUser;
     private String proxyPass;
 
-    public OperaBinaryConfig(String driverBinaryFolder, String desiredDriverPlatform,
-                             String desiredDriverVersion, String desiredBinaryArchitecture,
-                             String targetBrowserPath, String binaryDownloadTimeout,
-                             String driverVersionAsJavaPreferenceTtl, String binariesRepositoryUrl,
-                             String gitHubTokenName, String getGitHubTokenSecret,
-                             String proxySocket, String proxyUser, String proxyPass) {
+    public CommonDriverBinaryConfig(String browserType, String driverBinaryFolder, String desiredDriverPlatform,
+                                    String desiredDriverVersion, String desiredBinaryArchitecture,
+                                    String targetBrowserPath, String binaryDownloadTimeout,
+                                    String driverVersionAsJavaPreferenceTtl, String binariesRepositoryUrl,
+                                    String gitHubTokenName, String getGitHubTokenSecret,
+                                    String proxySocket, String proxyUser, String proxyPass) {
+
+        this.browserType = browserType;
         this.driverBinaryFolder = driverBinaryFolder;
         this.desiredDriverPlatform = desiredDriverPlatform;
         this.desiredDriverVersion = desiredDriverVersion;
@@ -47,8 +50,9 @@ public class OperaBinaryConfig {
         this.proxyPass = proxyPass;
     }
 
-    public void construct() {
-        manager = WebDriverManager.operadriver()
+    @Override
+    public void init(){
+        manager = WebDriverManager.getInstance(DriverManagerType.valueOf(browserType))
                 .targetPath(driverBinaryFolder)
                 .operatingSystem(OperatingSystem.valueOf(desiredDriverPlatform))
                 .version(desiredDriverVersion)
@@ -62,9 +66,6 @@ public class OperaBinaryConfig {
                 .proxy(proxySocket)
                 .proxyUser(proxyUser)
                 .proxyPass(proxyPass);
-    }
-
-    public void init(){
         manager.setup();
     }
 

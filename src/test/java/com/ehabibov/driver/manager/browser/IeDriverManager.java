@@ -1,4 +1,4 @@
-package com.ehabibov.driver.manager;
+package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -6,18 +6,13 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import java.io.File;
 import java.io.IOException;
 
-import com.ehabibov.driver.binary.IeBinaryConfig;
+import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.IeDriverConfig;
 
 public class IeDriverManager extends DriverManager {
 
     private InternetExplorerDriverService ieDriverService;
-    private IeBinaryConfig ieBinaryConfig;
     private IeDriverConfig ieDriverConfig;
-
-    public void setIeBinaryConfig(IeBinaryConfig ieBinaryConfig) {
-        this.ieBinaryConfig = ieBinaryConfig;
-    }
 
     public void setIeDriverConfig(IeDriverConfig ieDriverConfig) {
         this.ieDriverConfig = ieDriverConfig;
@@ -26,10 +21,9 @@ public class IeDriverManager extends DriverManager {
     @Override
     protected void prepareService() {
         if (ieDriverService == null) {
-            ieBinaryConfig.construct();
-            ieBinaryConfig.init();
+            driverBinaryConfig.init();
             ieDriverService = new InternetExplorerDriverService.Builder()
-                    .usingDriverExecutable(new File(ieBinaryConfig.getBinaryPath()))
+                    .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingAnyFreePort()
                     .build();
         }

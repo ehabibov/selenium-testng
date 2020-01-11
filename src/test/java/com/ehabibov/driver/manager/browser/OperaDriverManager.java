@@ -1,4 +1,4 @@
-package com.ehabibov.driver.manager;
+package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.opera.OperaDriverService;
 import org.openqa.selenium.opera.OperaDriver;
@@ -6,18 +6,13 @@ import org.openqa.selenium.opera.OperaOptions;
 import java.io.File;
 import java.io.IOException;
 
-import com.ehabibov.driver.binary.OperaBinaryConfig;
+import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.OperaDriverConfig;
 
 public class OperaDriverManager extends DriverManager {
 
     private OperaDriverService operaDriverService;
-    private OperaBinaryConfig operaBinaryConfig;
     private OperaDriverConfig operaDriverConfig;
-
-    public void setOperaBinaryConfig(OperaBinaryConfig operaBinaryConfig) {
-        this.operaBinaryConfig = operaBinaryConfig;
-    }
 
     public void setOperaDriverConfig(OperaDriverConfig operaDriverConfig) {
         this.operaDriverConfig = operaDriverConfig;
@@ -26,10 +21,9 @@ public class OperaDriverManager extends DriverManager {
     @Override
     protected void prepareService() {
         if (operaDriverService == null) {
-            operaBinaryConfig.construct();
-            operaBinaryConfig.init();
+            driverBinaryConfig.init();
             operaDriverService = new OperaDriverService.Builder()
-                    .usingDriverExecutable(new File(operaBinaryConfig.getBinaryPath()))
+                    .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingAnyFreePort()
                     .build();
         }

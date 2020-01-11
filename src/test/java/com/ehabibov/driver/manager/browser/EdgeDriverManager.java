@@ -1,4 +1,4 @@
-package com.ehabibov.driver.manager;
+package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.edge.ChromiumEdgeDriverService;
 import org.openqa.selenium.edge.EdgeDriverService;
@@ -7,18 +7,13 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.io.IOException;
 
-import com.ehabibov.driver.binary.EdgeBinaryConfig;
+import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.EdgeDriverConfig;
 
 public class EdgeDriverManager extends DriverManager {
 
     private EdgeDriverService edgeDriverService;
-    private EdgeBinaryConfig edgeBinaryConfig;
     private EdgeDriverConfig edgeDriverConfig;
-
-    public void setEdgeBinaryConfig(EdgeBinaryConfig edgeBinaryConfig) {
-        this.edgeBinaryConfig = edgeBinaryConfig;
-    }
 
     public void setEdgeDriverConfig(EdgeDriverConfig edgeDriverConfig) {
         this.edgeDriverConfig = edgeDriverConfig;
@@ -27,10 +22,9 @@ public class EdgeDriverManager extends DriverManager {
     @Override
     protected void prepareService() {
         if (edgeDriverService == null) {
-            edgeBinaryConfig.construct();
-            edgeBinaryConfig.init();
+            driverBinaryConfig.init();
             edgeDriverService = new ChromiumEdgeDriverService.Builder()
-                    .usingDriverExecutable(new File(edgeBinaryConfig.getBinaryPath()))
+                    .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingAnyFreePort()
                     .build();
         }

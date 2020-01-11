@@ -1,10 +1,13 @@
 package com.ehabibov.driver.manager;
 
 import org.openqa.selenium.WebDriver;
+import com.ehabibov.driver.binary.DriverBinaryConfig;
 
 public abstract class DriverManager {
 
     protected WebDriver driver;
+    protected DriverBinaryConfig driverBinaryConfig;
+
     protected abstract void prepareService();
     protected abstract void startService();
     protected abstract void stopService();
@@ -24,5 +27,9 @@ public abstract class DriverManager {
             driver.quit();
             driver = null;
         }
+    }
+
+    public void setBinaryConfig(DriverBinaryConfig driverBinaryConfig) {
+        this.driverBinaryConfig = driverBinaryConfig;
     }
 }

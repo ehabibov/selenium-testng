@@ -1,4 +1,4 @@
-package com.ehabibov.driver.manager;
+package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -6,18 +6,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
 import java.io.IOException;
 
-import com.ehabibov.driver.binary.ChromeBinaryConfig;
+import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.ChromeDriverConfig;
 
 public class ChromeDriverManager extends DriverManager {
 
     private ChromeDriverService chromeDriverService;
-    private ChromeBinaryConfig chromeBinaryConfig;
     private ChromeDriverConfig chromeDriverConfig;
-
-    public void setChromeBinaryConfig(ChromeBinaryConfig chromeBinaryConfig) {
-        this.chromeBinaryConfig = chromeBinaryConfig;
-    }
 
     public void setChromeDriverConfig(ChromeDriverConfig chromeDriverConfig) {
         this.chromeDriverConfig = chromeDriverConfig;
@@ -25,12 +20,10 @@ public class ChromeDriverManager extends DriverManager {
 
     @Override
     protected void prepareService() {
-        if (null == chromeDriverService) {
-            chromeBinaryConfig.construct();
-            chromeBinaryConfig.init();
-            File binary = new File(chromeBinaryConfig.getBinaryPath());
+        if (chromeDriverService == null) {
+            driverBinaryConfig.init();
             chromeDriverService = new ChromeDriverService.Builder()
-                    .usingDriverExecutable(binary)
+                    .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingAnyFreePort()
                     .build();
         }
@@ -60,7 +53,6 @@ public class ChromeDriverManager extends DriverManager {
         options.addEncodedExtensions();
         options.setAcceptInsecureCerts();
         options.setBinary();
-        options.setCapability();
         options.setCapability();
         options.setExperimentalOption();
         options.setHeadless();

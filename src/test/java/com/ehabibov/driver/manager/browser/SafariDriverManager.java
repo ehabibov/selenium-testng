@@ -1,4 +1,4 @@
-package com.ehabibov.driver.manager;
+package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.safari.SafariDriverService;
 import org.openqa.selenium.safari.SafariDriver;
@@ -6,18 +6,13 @@ import org.openqa.selenium.safari.SafariOptions;
 import java.io.File;
 import java.io.IOException;
 
-import com.ehabibov.driver.binary.SafariBinaryConfig;
+import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.SafariDriverConfig;
 
 public class SafariDriverManager extends DriverManager {
 
     private SafariDriverService safariDriverService;
-    private SafariBinaryConfig safariBinaryConfig;
     private SafariDriverConfig safariDriverConfig;
-
-    public void setSafariBinaryConfig(SafariBinaryConfig safariBinaryConfig) {
-        this.safariBinaryConfig = safariBinaryConfig;
-    }
 
     public void setSafariDriverConfig(SafariDriverConfig safariDriverConfig) {
         this.safariDriverConfig = safariDriverConfig;
@@ -25,9 +20,10 @@ public class SafariDriverManager extends DriverManager {
 
     @Override
     public void prepareService() {
+        driverBinaryConfig.init();
         if (safariDriverService == null) {
             safariDriverService = new SafariDriverService.Builder()
-                    .usingDriverExecutable(new File(safariBinaryConfig.getBinaryPath()))
+                    .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingAnyFreePort()
                     .build();
         }

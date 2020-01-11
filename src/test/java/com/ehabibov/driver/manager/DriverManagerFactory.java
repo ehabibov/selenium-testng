@@ -1,5 +1,6 @@
 package com.ehabibov.driver.manager;
 
+import com.ehabibov.driver.manager.browser.*;
 import org.springframework.beans.factory.FactoryBean;
 import com.ehabibov.driver.DriverType;
 
@@ -23,8 +24,8 @@ public class DriverManagerFactory implements FactoryBean<DriverManager> {
             case FIREFOX:
                 driverManager = this.firefoxDriverManager;
                 break;
-            case SAFARI:
-                driverManager = this.safariDriverManager;
+            case OPERA:
+                driverManager = this.operaDriverManager;
                 break;
             case IE:
                 driverManager = this.ieDriverManager;
@@ -32,11 +33,11 @@ public class DriverManagerFactory implements FactoryBean<DriverManager> {
             case EDGE:
                 driverManager = this.edgeDriverManager;
                 break;
-            case OPERA:
-                driverManager = this.operaDriverManager;
+            case SAFARI:
+                driverManager = this.safariDriverManager;
                 break;
             default:
-                throw new NullPointerException();
+                throw new IllegalArgumentException("Browser not exists: " + driverType.toString());
         }
         return driverManager;
     }

@@ -1,4 +1,4 @@
-package com.ehabibov.driver.manager;
+package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.firefox.FirefoxDriverService;
@@ -7,18 +7,13 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import java.io.File;
 import java.io.IOException;
 
-import com.ehabibov.driver.binary.FirefoxBinaryConfig;
+import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.FirefoxDriverConfig;
 
 public class FirefoxDriverManager extends DriverManager {
 
     private FirefoxDriverService firefoxDriverService;
-    private FirefoxBinaryConfig firefoxBinaryConfig;
     private FirefoxDriverConfig firefoxDriverConfig;
-
-    public void setFirefoxBinaryConfig(FirefoxBinaryConfig firefoxBinaryConfig) {
-        this.firefoxBinaryConfig = firefoxBinaryConfig;
-    }
 
     public void setFirefoxDriverConfig(FirefoxDriverConfig firefoxDriverConfig) {
         this.firefoxDriverConfig = firefoxDriverConfig;
@@ -27,10 +22,9 @@ public class FirefoxDriverManager extends DriverManager {
     @Override
     protected void prepareService() {
         if (firefoxDriverService == null) {
-            firefoxBinaryConfig.construct();
-            firefoxBinaryConfig.init();
+            driverBinaryConfig.init();
             firefoxDriverService = new GeckoDriverService.Builder()
-                    .usingDriverExecutable(new File(firefoxBinaryConfig.getBinaryPath()))
+                    .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingAnyFreePort()
                     .build();
         }
