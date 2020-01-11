@@ -1,18 +1,34 @@
 package com.ehabibov.listeners;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import io.qameta.allure.Allure;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+import com.ehabibov.context.ApplicationContextSingleton;
+import com.ehabibov.driver.manager.DriverManager;
 
 public class SeleniumTestListener implements ITestListener {
 
     private static final Logger log = LoggerFactory.getLogger(SeleniumTestListener.class);
 
+    protected WebDriver driver;
+
     @Override
     public void onStart(ITestContext context) {
         log.info("test onStart");
+        DriverManager manager = (DriverManager) ApplicationContextSingleton.getContext().getBean("driverManager");
+        this.driver = manager.getDriver();
     }
 
     @Override
@@ -33,6 +49,7 @@ public class SeleniumTestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         log.info("test onTestFailure");
+        this.takeScreenshot();
     }
 
     @Override
@@ -50,4 +67,15 @@ public class SeleniumTestListener implements ITestListener {
         log.info("test onFinish");
     }
 
+    private void takeScreenshot(){
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        try {
+            InputStream is = new FileInputStream(screenshot);
+            Allure.addAttachment("Page screenshot", "image/jpeg", is, "jpeg");
+            log.info("Created screenshot");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

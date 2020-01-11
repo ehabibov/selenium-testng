@@ -1,9 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Suite" parallel="false">
-    <listeners>
-        <listener class-name="com.ehabibov.listeners.SeleniumSuiteListener"/>
-    </listeners>
-    <test name="Test1">
+<suite name="LoginSuite" parallel="false">
+    <test name="Login">
         <parameter name="username" value="user"/>
         <parameter name="password" value="bitnami"/>
         <classes>
