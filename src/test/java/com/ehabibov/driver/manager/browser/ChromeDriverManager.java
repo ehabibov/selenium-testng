@@ -5,34 +5,44 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
+import com.ehabibov.driver.CapabilitiesPrinter;
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.ChromeDriverConfig;
+import com.ehabibov.driver.config.ChromeDriverConfig;;
 
 public class ChromeDriverManager extends DriverManager {
 
-    private ChromeDriverService chromeDriverService;
-    private ChromeDriverConfig chromeDriverConfig;
+    private ChromeDriverService service;
+    private ChromeDriverConfig config;
+    private ChromeOptions options;
 
     public void setChromeDriverConfig(ChromeDriverConfig chromeDriverConfig) {
-        this.chromeDriverConfig = chromeDriverConfig;
+        this.config = chromeDriverConfig;
     }
 
     @Override
     protected void prepareService() {
-        if (chromeDriverService == null) {
+        if (service == null) {
             driverBinaryConfig.init();
-            chromeDriverService = new ChromeDriverService.Builder()
+            service = new ChromeDriverService.Builder()
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
-                    .usingAnyFreePort()
+                    .usingPort(0)
+
+                    .withEnvironment(new HashMap<>())
+                    .withLogFile(new File("file"))
+                    .withSilent(true)
+                    .withAppendLog(true)
+                    .withVerbose(true)
                     .build();
         }
+        options = config.getOptions();
     }
 
     @Override
     public void startService() {
         try {
-            chromeDriverService.start();
+            service.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,28 +50,14 @@ public class ChromeDriverManager extends DriverManager {
 
     @Override
     public void stopService() {
-        if (chromeDriverService != null && chromeDriverService.isRunning())
-            chromeDriverService.stop();
+        if (service != null && service.isRunning())
+            service.stop();
     }
 
     @Override
     public void createDriver() {
-        ChromeOptions options = new ChromeOptions();
-        /*
-        options.addArguments();
-        options.addExtensions();
-        options.addEncodedExtensions();
-        options.setAcceptInsecureCerts();
-        options.setBinary();
-        options.setCapability();
-        options.setExperimentalOption();
-        options.setHeadless();
-        options.setPageLoadStrategy();
-        options.setProxy();
-        options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
-        */
-        driver = new ChromeDriver(chromeDriverService, options);
+        driver = new ChromeDriver(service, options);
+        new CapabilitiesPrinter(driver).printCapabilities();
     }
 
 }

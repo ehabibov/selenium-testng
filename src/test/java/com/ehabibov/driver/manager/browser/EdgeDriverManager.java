@@ -9,31 +9,38 @@ import java.io.IOException;
 
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.EdgeDriverConfig;
+import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class EdgeDriverManager extends DriverManager {
 
-    private EdgeDriverService edgeDriverService;
-    private EdgeDriverConfig edgeDriverConfig;
+    private EdgeDriverService service;
+    private EdgeDriverConfig config;
+    private EdgeOptions options;
 
     public void setEdgeDriverConfig(EdgeDriverConfig edgeDriverConfig) {
-        this.edgeDriverConfig = edgeDriverConfig;
+        this.config = edgeDriverConfig;
     }
 
     @Override
     protected void prepareService() {
-        if (edgeDriverService == null) {
+        if (service == null) {
             driverBinaryConfig.init();
-            edgeDriverService = new ChromiumEdgeDriverService.Builder()
+            service = new ChromiumEdgeDriverService.Builder()
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
-                    .usingAnyFreePort()
+                    .usingPort(0)
+
+                    .withEnvironment(map)
+                    .withSilent(true)
+                    .withVerbose(true);
                     .build();
         }
+        options = config.getOptions();
     }
 
     @Override
     public void startService() {
         try {
-            edgeDriverService.start();
+            service.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,28 +48,14 @@ public class EdgeDriverManager extends DriverManager {
 
     @Override
     public void stopService() {
-        if (edgeDriverService != null && edgeDriverService.isRunning())
-            edgeDriverService.stop();
+        if (service != null && service.isRunning())
+            service.stop();
     }
 
     @Override
     public void createDriver() {
-        EdgeOptions options = new EdgeOptions();
-        /*
-        options.addArguments();
-        options.addEncodedExtensions();
-        options.addExtensions();
-        options.setBinary();
-        options.setCapability();
-        options.setExperimentalOption()
-        options.setHeadless();
-        options.setPageLoadStrategy();
-        options.setProxy();
-        options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
-        options.asMap();
-        */
-        driver = new RemoteWebDriver(edgeDriverService.getUrl(), options);
+        driver = new RemoteWebDriver(service.getUrl(), options);
+        new CapabilitiesPrinter(driver).printCapabilities();
     }
 
 }

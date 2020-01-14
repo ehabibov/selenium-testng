@@ -8,31 +8,38 @@ import java.io.IOException;
 
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.SafariDriverConfig;
+import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class SafariDriverManager extends DriverManager {
 
-    private SafariDriverService safariDriverService;
-    private SafariDriverConfig safariDriverConfig;
+    private SafariDriverService service;
+    private SafariDriverConfig config;
+    private SafariOptions options;
 
     public void setSafariDriverConfig(SafariDriverConfig safariDriverConfig) {
-        this.safariDriverConfig = safariDriverConfig;
+        this.config = safariDriverConfig;
     }
 
     @Override
     public void prepareService() {
         driverBinaryConfig.init();
-        if (safariDriverService == null) {
-            safariDriverService = new SafariDriverService.Builder()
+        if (service == null) {
+            service = new SafariDriverService.Builder()
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
-                    .usingAnyFreePort()
+                    .usingPort(0)
+
+                    .withLogFile(file)
+                    .withEnvironment(map)
+                    .usingTechnologyPreview(true);
                     .build();
         }
+        options = config.getOptions();
     }
 
     @Override
     public void startService(){
         try {
-            safariDriverService.start();
+            service.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,24 +47,13 @@ public class SafariDriverManager extends DriverManager {
 
     @Override
     public void stopService() {
-        if (safariDriverService != null  && safariDriverService.isRunning())
-            safariDriverService.stop();
+        if (service != null  && service.isRunning())
+            service.stop();
     }
 
     @Override
     public void createDriver() {
-        SafariOptions options = new SafariOptions();
-        /*
-        options.setAcceptInsecureCerts();
-        options.setAutomaticInspection();
-        options.setAutomaticProfiling();
-        options.setCapability();
-        options.setPageLoadStrategy();
-        options.setProxy();
-        options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
-        options.setUseTechnologyPreview();
-        */
-        driver = new SafariDriver(safariDriverService, options);
+        driver = new SafariDriver(service, options);
+        new CapabilitiesPrinter(driver).printCapabilities();
     }
 }

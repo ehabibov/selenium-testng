@@ -8,31 +8,39 @@ import java.io.IOException;
 
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.OperaDriverConfig;
+import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class OperaDriverManager extends DriverManager {
 
-    private OperaDriverService operaDriverService;
-    private OperaDriverConfig operaDriverConfig;
+    private OperaDriverService service;
+    private OperaDriverConfig config;
+    private OperaOptions options;
 
     public void setOperaDriverConfig(OperaDriverConfig operaDriverConfig) {
-        this.operaDriverConfig = operaDriverConfig;
+        this.config = operaDriverConfig;
     }
 
     @Override
     protected void prepareService() {
-        if (operaDriverService == null) {
+        if (service == null) {
             driverBinaryConfig.init();
-            operaDriverService = new OperaDriverService.Builder()
+            service = new OperaDriverService.Builder()
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
-                    .usingAnyFreePort()
+                    .usingPort(0)
+
+                    .withLogFile(file)
+                    .withEnvironment(map)
+                    .withSilent(true)
+                    .withVerbose(true)
                     .build();
         }
+        options = config.getOptions();
     }
 
     @Override
     public void startService() {
         try {
-            operaDriverService.start();
+            service.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,28 +48,14 @@ public class OperaDriverManager extends DriverManager {
 
     @Override
     public void stopService() {
-        if (operaDriverService !=null && operaDriverService.isRunning())
-            operaDriverService.stop();
+        if (service !=null && service.isRunning())
+            service.stop();
     }
 
     @Override
     public void createDriver() {
-        OperaOptions options = new OperaOptions();
-        /*
-        options.addArguments();
-        options.addExtensions();
-        options.addEncodedExtensions();
-        options.setAcceptInsecureCerts();
-        options.setBinary();
-        options.setCapability();
-        options.setCapability();
-        options.setExperimentalOption();
-        options.setPageLoadStrategy();
-        options.setProxy();
-        options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
-        */
-        driver = new OperaDriver(operaDriverService, options);
+        driver = new OperaDriver(service, options);
+        new CapabilitiesPrinter(driver).printCapabilities();
     }
 
 }

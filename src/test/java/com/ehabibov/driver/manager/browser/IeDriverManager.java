@@ -1,5 +1,6 @@
 package com.ehabibov.driver.manager.browser;
 
+import org.openqa.selenium.ie.InternetExplorerDriverLogLevel;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
@@ -8,31 +9,41 @@ import java.io.IOException;
 
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.IeDriverConfig;
+import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class IeDriverManager extends DriverManager {
 
-    private InternetExplorerDriverService ieDriverService;
-    private IeDriverConfig ieDriverConfig;
+    private InternetExplorerDriverService service;
+    private IeDriverConfig config;
+    private InternetExplorerOptions options;
 
     public void setIeDriverConfig(IeDriverConfig ieDriverConfig) {
-        this.ieDriverConfig = ieDriverConfig;
+        this.config = ieDriverConfig;
     }
 
     @Override
     protected void prepareService() {
-        if (ieDriverService == null) {
+        if (service == null) {
             driverBinaryConfig.init();
-            ieDriverService = new InternetExplorerDriverService.Builder()
+            service = new InternetExplorerDriverService.Builder()
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
-                    .usingAnyFreePort()
+                    .usingPort(0)
+
+                    .withLogFile(file)
+                    .withEnvironment(map)
+                    .withSilent(true)
+                    .withExtractPath(file)
+                    .withHost("")
+                    .withLogLevel(InternetExplorerDriverLogLevel.INFO);
                     .build();
         }
+        options = config.getOptions();
     }
 
     @Override
     public void startService() {
         try {
-            ieDriverService.start();
+            service.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,37 +51,14 @@ public class IeDriverManager extends DriverManager {
 
     @Override
     public void stopService() {
-        if (ieDriverService !=null && ieDriverService.isRunning())
-            ieDriverService.stop();
+        if (service !=null && service.isRunning())
+            service.stop();
     }
 
     @Override
     public void createDriver() {
-        InternetExplorerOptions options = new InternetExplorerOptions();
-        /*
-        options.addCommandSwitches();
-        options.destructivelyEnsureCleanSession();
-        options.disableNativeEvents();
-        options.elementScrollTo();
-        options.enablePersistentHovering();
-        options.ignoreZoomSettings();
-        options.introduceFlakinessByIgnoringSecurityDomains();
-        options.requireWindowFocus();
-        options.setCapability();
-        options.setPageLoadStrategy();
-        options.setProxy();
-        options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
-        options.takeFullPageScreenshot();
-        options.useCreateProcessApiToLaunchIe();
-        options.usePerProcessProxy();
-        options.useShellWindowsApiToAttachToIe();
-        options.waitForUploadDialogUpTo();
-        options.withAttachTimeout();
-        options.withInitialBrowserUrl();
-        options.asMap();
-        */
-        driver = new InternetExplorerDriver(ieDriverService, options);
+        driver = new InternetExplorerDriver(service, options);
+        new CapabilitiesPrinter(driver).printCapabilities();
     }
 
 }
