@@ -18,6 +18,11 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
 
+    <bean id="applicationConfig" class="com.ehabibov.context.ApplicationConfig"
+          p:applicationHost="${application.host}"
+          p:applicationPort="${application.port}"
+          p:browserType="${browser.type}"/>
+
     <bean id="commonDriverBinaryConfig" class="com.ehabibov.driver.binary.CommonDriverBinaryConfig" lazy-init="true"
           c:browserType="${browser.type}"
           c:driverBinaryFolder="${browser.binary.folder.path}"

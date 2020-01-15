@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePageOR implements LocatorRepository {
 
-    private static By trait = By.className("nav.navbar");
+    private static By trait = By.cssSelector("nav.navbar");
 
     @FindBy(css = "nav.navbar") private WebElement mainBar;
 

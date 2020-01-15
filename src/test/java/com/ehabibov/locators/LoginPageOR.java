@@ -1,12 +1,9 @@
 package com.ehabibov.locators;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPageOR implements LocatorRepository {
-
-    private By user = By.cssSelector("input[type='text']");
 
     @FindBy(css = "input[type='text']") private WebElement username;
     @FindBy(css = "input[type='password']") private WebElement password;

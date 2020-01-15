@@ -52,7 +52,7 @@ public class CommonDriverBinaryConfig implements DriverBinaryConfig {
 
     @Override
     public void init(){
-        manager = WebDriverManager.getInstance(DriverManagerType.valueOf(browserType))
+        manager = WebDriverManager.getInstance(DriverManagerType.valueOf(browserType.toUpperCase()))
                 .targetPath(driverBinaryFolder)
                 .operatingSystem(OperatingSystem.valueOf(desiredDriverPlatform))
                 .version(desiredDriverVersion)

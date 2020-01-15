@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import com.ehabibov.driver.CapabilitiesPrinter;
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.ChromeDriverConfig;;
+import com.ehabibov.driver.config.ChromeDriverConfig;
 
 public class ChromeDriverManager extends DriverManager<ChromeDriver> {
 

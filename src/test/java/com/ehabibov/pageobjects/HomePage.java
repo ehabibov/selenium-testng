@@ -1,8 +1,12 @@
 package com.ehabibov.pageobjects;
 
-import com.ehabibov.locators.HomePageOR;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import java.time.Duration;
+
+import com.ehabibov.locators.HomePageOR;
 
 public class HomePage extends AbstractPage {
 
@@ -13,5 +17,7 @@ public class HomePage extends AbstractPage {
     public HomePage() {
         objectRepository = this.setObjectRepository(HomePageOR.class);
         initPage(objectRepository);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait.until(ExpectedConditions.presenceOfElementLocated(HomePageOR.getTrait()));
     }
 }

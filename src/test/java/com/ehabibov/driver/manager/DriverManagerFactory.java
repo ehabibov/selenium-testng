@@ -53,8 +53,8 @@ public class DriverManagerFactory implements FactoryBean<DriverManager<?>> {
         return true;
     }
 
-    public void setDriverType(DriverType driverType) {
-        this.driverType = driverType;
+    public void setDriverType(String driverType) {
+        this.driverType = DriverType.valueOf(driverType.toUpperCase()) ;
     }
 
     public void setChromeDriverManager(ChromeDriverManager chromeDriverManager) {

@@ -6,5 +6,5 @@ public enum DriverType {
     SAFARI,
     IE,
     EDGE,
-    OPERA;
+    OPERA
 }

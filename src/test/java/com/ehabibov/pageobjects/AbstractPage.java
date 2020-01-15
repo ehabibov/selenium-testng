@@ -6,16 +6,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
-import com.ehabibov.listeners.driver.DriverListener;
 import com.ehabibov.context.ApplicationContextProvider;
+import com.ehabibov.context.ApplicationConfig;
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.locators.LocatorRepository;
+import com.ehabibov.listeners.driver.DriverListener;
 
 public abstract class AbstractPage {
 
     private static final Logger log = LoggerFactory.getLogger(AbstractPage.class);
 
     protected ApplicationContext context;
+    protected ApplicationConfig appConfig;
     protected DriverManager<?> manager;
     protected EventFiringWebDriver driver;
 
@@ -25,6 +27,7 @@ public abstract class AbstractPage {
 
     void initDriver(){
         this.context = ApplicationContextProvider.getApplicationContext();
+        this.appConfig = context.getBean(ApplicationConfig.class);
         this.manager = (DriverManager<?>) context.getBean("driverManager");
         this.driver = new EventFiringWebDriver(manager.getDriver());
         this.driver.register(new DriverListener());
@@ -35,13 +38,28 @@ public abstract class AbstractPage {
     }
 
     protected <T extends LocatorRepository> T setObjectRepository(Class<T> type) {
-        T instance;
+        T instance = null;
         try {
             instance =  type.newInstance();
-            return instance;
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        return null;
+        return instance;
+    }
+
+    protected String getAppUrl(){
+        return String.format("%s:%s", appConfig.getApplicationHost(), appConfig.getApplicationPort());
+    }
+
+    protected String getBrowser(){
+        return this.appConfig.getBrowserType();
+    }
+
+    public boolean isSafari(){
+        return this.getBrowser().equalsIgnoreCase("safari");
+    }
+
+    public boolean isNotSafari(){
+        return !this.isSafari();
     }
 }

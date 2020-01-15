@@ -9,7 +9,7 @@ public class InitPage extends AbstractPage {
 
     public LoginPage goToLoginPage(){
         driver.manage().window().maximize();
-        driver.get("http://localhost:8080");
+        driver.get(getAppUrl());
         return new LoginPage();
     }
 

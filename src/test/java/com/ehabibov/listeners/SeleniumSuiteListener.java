@@ -13,13 +13,13 @@ public class SeleniumSuiteListener implements ISuiteListener {
 
     private static final Logger log = LoggerFactory.getLogger(SeleniumSuiteListener.class);
 
-    protected DriverManager manager;
+    protected DriverManager<?> manager;
     protected WebDriver driver;
 
     @Override
     public void onStart(ISuite suiteContext) {
         log.info("suite onStart");
-        this.manager = (DriverManager) ApplicationContextSingleton.getContext().getBean("driverManager");
+        this.manager = (DriverManager<?>) ApplicationContextSingleton.getContext().getBean("driverManager");
         this.driver = this.manager.getDriver();
     }
 
