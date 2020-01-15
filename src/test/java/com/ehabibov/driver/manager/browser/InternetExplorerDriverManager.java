@@ -6,19 +6,20 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
+import com.ehabibov.driver.config.InternetExplorerDriverConfig;
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.IeDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class IeDriverManager extends DriverManager {
+public class InternetExplorerDriverManager extends DriverManager<InternetExplorerDriver> {
 
     private InternetExplorerDriverService service;
-    private IeDriverConfig config;
+    private InternetExplorerDriverConfig config;
     private InternetExplorerOptions options;
 
-    public void setIeDriverConfig(IeDriverConfig ieDriverConfig) {
-        this.config = ieDriverConfig;
+    public void setInternetExplorerDriverConfig(InternetExplorerDriverConfig internetExplorerDriverConfig) {
+        this.config = internetExplorerDriverConfig;
     }
 
     @Override
@@ -29,12 +30,12 @@ public class IeDriverManager extends DriverManager {
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingPort(0)
 
-                    .withLogFile(file)
-                    .withEnvironment(map)
+                    .withLogFile(new File("file"))
+                    .withEnvironment(new HashMap<>())
                     .withSilent(true)
-                    .withExtractPath(file)
+                    .withExtractPath(new File("file2"))
                     .withHost("")
-                    .withLogLevel(InternetExplorerDriverLogLevel.INFO);
+                    .withLogLevel(InternetExplorerDriverLogLevel.TRACE)
                     .build();
         }
         options = config.getOptions();

@@ -5,12 +5,13 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.SafariDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class SafariDriverManager extends DriverManager {
+public class SafariDriverManager extends DriverManager<SafariDriver> {
 
     private SafariDriverService service;
     private SafariDriverConfig config;
@@ -28,9 +29,9 @@ public class SafariDriverManager extends DriverManager {
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingPort(0)
 
-                    .withLogFile(file)
-                    .withEnvironment(map)
-                    .usingTechnologyPreview(true);
+                    .withLogFile(new File("file"))
+                    .withEnvironment(new HashMap<>())
+                    .usingTechnologyPreview(true)
                     .build();
         }
         options = config.getOptions();

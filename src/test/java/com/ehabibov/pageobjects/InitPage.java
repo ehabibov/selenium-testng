@@ -1,7 +1,7 @@
 package com.ehabibov.pageobjects;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 public class InitPage extends AbstractPage {
 

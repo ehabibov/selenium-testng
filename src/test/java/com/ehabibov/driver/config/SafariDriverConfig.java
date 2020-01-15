@@ -16,8 +16,8 @@ public class SafariDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        SafariOptions options = new SafariOptions();
-        options.setAcceptInsecureCerts();
+        options = new SafariOptions();
+        /*options.setAcceptInsecureCerts();
         options.setAutomaticInspection();
         options.setAutomaticProfiling();
         options.setCapability();
@@ -25,7 +25,7 @@ public class SafariDriverConfig implements DriverConfig {
         options.setProxy(proxy);
         options.setStrictFileInteractability();
         options.setUnhandledPromptBehaviour();
-        options.setUseTechnologyPreview();
+        options.setUseTechnologyPreview();*/
     }
 
     public SafariOptions getOptions() {
@@ -34,7 +34,7 @@ public class SafariDriverConfig implements DriverConfig {
     }
 
     public Proxy setProxy(){
-        proxy = new Proxy();
+        /*proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -44,6 +44,15 @@ public class SafariDriverConfig implements DriverConfig {
         proxy.setSocksProxy();
         proxy.setSocksUsername();
         proxy.setSocksVersion();
-        proxy.setSslProxy();
+        proxy.setSslProxy();*/
+        return proxy;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setArgs(List<String> args) {
+        this.args = args;
     }
 }

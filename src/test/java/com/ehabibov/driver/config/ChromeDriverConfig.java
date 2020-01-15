@@ -16,8 +16,8 @@ public class ChromeDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(args);
+        options = new ChromeOptions();
+        /*options.addArguments(args);
         options.addExtensions(extensions);
         options.addEncodedExtensions();
         options.setAcceptInsecureCerts(acceptInsecureCerts);
@@ -28,7 +28,7 @@ public class ChromeDriverConfig implements DriverConfig {
         options.setPageLoadStrategy();
         options.setStrictFileInteractability();
         options.setUnhandledPromptBehaviour();
-        options.setProxy(proxy);
+        options.setProxy(proxy);*/
     }
 
     public ChromeOptions getOptions() {
@@ -37,7 +37,7 @@ public class ChromeDriverConfig implements DriverConfig {
     }
 
     public Proxy setProxy(){
-        proxy = new Proxy();
+        /*proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -47,7 +47,16 @@ public class ChromeDriverConfig implements DriverConfig {
         proxy.setSocksProxy();
         proxy.setSocksUsername();
         proxy.setSocksVersion();
-        proxy.setSslProxy();
+        proxy.setSslProxy();*/
+        return proxy;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setArgs(List<String> args) {
+        this.args = args;
     }
 
 }

@@ -11,7 +11,7 @@ import com.ehabibov.driver.CapabilitiesPrinter;
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.ChromeDriverConfig;;
 
-public class ChromeDriverManager extends DriverManager {
+public class ChromeDriverManager extends DriverManager<ChromeDriver> {
 
     private ChromeDriverService service;
     private ChromeDriverConfig config;
@@ -31,7 +31,7 @@ public class ChromeDriverManager extends DriverManager {
 
                     .withEnvironment(new HashMap<>())
                     .withLogFile(new File("file"))
-                    .withSilent(true)
+                    //.withSilent(true)
                     .withAppendLog(true)
                     .withVerbose(true)
                     .build();

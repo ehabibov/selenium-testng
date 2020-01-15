@@ -5,7 +5,7 @@ import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class IeDriverConfig implements DriverConfig {
+public class InternetExplorerDriverConfig implements DriverConfig {
 
     private InternetExplorerOptions options;
     private String port;
@@ -16,8 +16,8 @@ public class IeDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        InternetExplorerOptions options = new InternetExplorerOptions();
-        options.addCommandSwitches();
+        options = new InternetExplorerOptions();
+        /*options.addCommandSwitches();
         options.destructivelyEnsureCleanSession();
         options.disableNativeEvents();
         options.elementScrollTo();
@@ -37,7 +37,7 @@ public class IeDriverConfig implements DriverConfig {
         options.waitForUploadDialogUpTo();
         options.withAttachTimeout();
         options.withInitialBrowserUrl();
-        options.asMap();
+        options.asMap();*/
     }
 
     public InternetExplorerOptions getOptions() {
@@ -46,7 +46,7 @@ public class IeDriverConfig implements DriverConfig {
     }
 
     public Proxy setProxy(){
-        proxy = new Proxy();
+        /*proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -56,6 +56,15 @@ public class IeDriverConfig implements DriverConfig {
         proxy.setSocksProxy();
         proxy.setSocksUsername();
         proxy.setSocksVersion();
-        proxy.setSslProxy();
+        proxy.setSslProxy();*/
+        return proxy;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setArgs(List<String> args) {
+        this.args = args;
     }
 }

@@ -1,11 +1,10 @@
 package com.ehabibov.driver;
 
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.slf4j.Logger;
 import java.util.Set;
 
 public class CapabilitiesPrinter {
@@ -19,13 +18,14 @@ public class CapabilitiesPrinter {
     }
 
     public void printCapabilities(){
-        Capabilities capabilities = ((ChromeDriver) this.driver).getCapabilities();
-
+        Capabilities capabilities = ((RemoteWebDriver) this.driver).getCapabilities();
+        String output="Capabilities:\n";
         Set<String> capabilityNames = capabilities.getCapabilityNames();
         for (String capabilityName : capabilityNames){
-            log.warn(capabilityName.concat(" : ").concat(capabilities.getCapability(capabilityName).toString()));
+            String capabilityValue = capabilities.getCapability(capabilityName).toString();
+            String capabilityOutput = String.format("\t%s : %s\n", capabilityName, capabilityValue);
+            output = output.concat(capabilityOutput);
         }
+        log.warn(output);
     }
-
-
 }

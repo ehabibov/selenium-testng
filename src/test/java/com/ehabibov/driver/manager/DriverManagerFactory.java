@@ -1,22 +1,23 @@
 package com.ehabibov.driver.manager;
 
-import com.ehabibov.driver.manager.browser.*;
 import org.springframework.beans.factory.FactoryBean;
+
+import com.ehabibov.driver.manager.browser.*;
 import com.ehabibov.driver.DriverType;
 
-public class DriverManagerFactory implements FactoryBean<DriverManager> {
+public class DriverManagerFactory implements FactoryBean<DriverManager<?>> {
 
     public DriverType driverType;
     public ChromeDriverManager chromeDriverManager;
     public FirefoxDriverManager firefoxDriverManager;
     public SafariDriverManager safariDriverManager;
-    public IeDriverManager ieDriverManager;
+    public InternetExplorerDriverManager internetExplorerDriverManager;
     public EdgeDriverManager edgeDriverManager;
     public OperaDriverManager operaDriverManager;
 
     @Override
-    public DriverManager getObject() {
-        DriverManager driverManager;
+    public DriverManager<?> getObject() {
+        DriverManager<?> driverManager;
         switch (driverType) {
             case CHROME:
                 driverManager = this.chromeDriverManager;
@@ -28,7 +29,7 @@ public class DriverManagerFactory implements FactoryBean<DriverManager> {
                 driverManager = this.operaDriverManager;
                 break;
             case IE:
-                driverManager = this.ieDriverManager;
+                driverManager = this.internetExplorerDriverManager;
                 break;
             case EDGE:
                 driverManager = this.edgeDriverManager;
@@ -68,8 +69,8 @@ public class DriverManagerFactory implements FactoryBean<DriverManager> {
         this.safariDriverManager = safariDriverManager;
     }
 
-    public void setIeDriverManager(IeDriverManager ieDriverManager) {
-        this.ieDriverManager = ieDriverManager;
+    public void setInternetExplorerDriverManager(InternetExplorerDriverManager internetExplorerDriverManager) {
+        this.internetExplorerDriverManager = internetExplorerDriverManager;
     }
 
     public void setEdgeDriverManager(EdgeDriverManager edgeDriverManager) {

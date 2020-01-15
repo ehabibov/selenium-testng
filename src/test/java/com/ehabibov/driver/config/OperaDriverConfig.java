@@ -5,7 +5,7 @@ import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class OperaDriverConfig implements DriverConfig{
+public class OperaDriverConfig implements DriverConfig {
 
     private OperaOptions options;
     private String port;
@@ -16,8 +16,8 @@ public class OperaDriverConfig implements DriverConfig{
     private Proxy proxy;
 
     public void initOptions(){
-        OperaOptions options = new OperaOptions();
-        options.addArguments(args);
+        options = new OperaOptions();
+        /*options.addArguments(args);
         options.addExtensions(extensions);
         options.addEncodedExtensions();
         options.setAcceptInsecureCerts(acceptInsecureCerts);
@@ -27,7 +27,7 @@ public class OperaDriverConfig implements DriverConfig{
         options.setPageLoadStrategy();
         options.setProxy(proxy);
         options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
+        options.setUnhandledPromptBehaviour();*/
     }
 
     public OperaOptions getOptions() {
@@ -36,7 +36,7 @@ public class OperaDriverConfig implements DriverConfig{
     }
 
     public Proxy setProxy(){
-        proxy = new Proxy();
+    /*    proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -46,6 +46,16 @@ public class OperaDriverConfig implements DriverConfig{
         proxy.setSocksProxy();
         proxy.setSocksUsername();
         proxy.setSocksVersion();
-        proxy.setSslProxy();
+        proxy.setSslProxy();*/
+        return proxy;
     }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setArgs(List<String> args) {
+        this.args = args;
+    }
+
 }

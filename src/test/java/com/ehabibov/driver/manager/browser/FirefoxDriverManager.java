@@ -6,12 +6,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.FirefoxDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class FirefoxDriverManager extends DriverManager {
+public class FirefoxDriverManager extends DriverManager<FirefoxDriver> {
 
     private FirefoxDriverService service;
     private FirefoxDriverConfig config;
@@ -29,8 +30,8 @@ public class FirefoxDriverManager extends DriverManager {
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingPort(0)
 
-                    .withLogFile(file)
-                    .withEnvironment(map)
+                    .withLogFile(new File("file"))
+                    .withEnvironment(new HashMap<>())
                     .build();
         }
         options = config.getOptions();

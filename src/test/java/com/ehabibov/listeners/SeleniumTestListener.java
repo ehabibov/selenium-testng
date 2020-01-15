@@ -27,7 +27,7 @@ public class SeleniumTestListener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         log.info("test onStart");
-        DriverManager manager = (DriverManager) ApplicationContextSingleton.getContext().getBean("driverManager");
+        DriverManager<?> manager = (DriverManager<?>) ApplicationContextSingleton.getContext().getBean("driverManager");
         this.driver = manager.getDriver();
     }
 
@@ -50,6 +50,7 @@ public class SeleniumTestListener implements ITestListener {
     public void onTestFailure(ITestResult result) {
         log.info("test onTestFailure");
         this.takeScreenshot();
+        this.takePageSource();
     }
 
     @Override
@@ -72,10 +73,15 @@ public class SeleniumTestListener implements ITestListener {
         try {
             InputStream is = new FileInputStream(screenshot);
             Allure.addAttachment("Page screenshot", "image/jpeg", is, "jpeg");
-            log.info("Created screenshot");
+            log.info("Saved screenshot");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
+    private void takePageSource(){
+        String pageSource = driver.getPageSource();
+        Allure.addAttachment("Page source", "text/plain", pageSource, "txt");
+        log.info("Saved page source");
     }
 }

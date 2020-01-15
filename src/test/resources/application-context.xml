@@ -35,33 +35,33 @@
           c:proxyPass="${browser.binary.download.proxy.pass:nil}"/>
 
     <bean id="safariDriverBinaryConfig" class="com.ehabibov.driver.binary.SafariDriverBinaryConfig" lazy-init="true"
-          c:driverBinaryFolder="${browser.binary.folder.path}"/>
+          c:driverBinaryFolder="${browser.binary.folder.path.safari}"/>
 
 
 
     <bean id="chromeDriverConfig" class="com.ehabibov.driver.config.ChromeDriverConfig"
-          c:port="${browser.driver.port}"
-          c:startArguments="#{'${chrome.start.arguments}'.split(',')}"/>
+          p:port="${browser.driver.port}"
+          p:args="#{'${chrome.start.arguments}'.split(',')}"/>
 
     <bean id="firefoxDriverConfig" class="com.ehabibov.driver.config.FirefoxDriverConfig"
-          c:port="${browser.driver.port}"
-          c:startArguments="#{'${firefox.start.arguments}'.split(',')}"/>
+          p:port="${browser.driver.port}"
+          p:args="#{'${firefox.start.arguments}'.split(',')}"/>
 
     <bean id="operaDriverConfig" class="com.ehabibov.driver.config.OperaDriverConfig"
-          c:port="${browser.driver.port}"
-          c:startArguments="#{'${opera.start.arguments}'.split(',')}"/>
+          p:port="${browser.driver.port}"
+          p:args="#{'${opera.start.arguments}'.split(',')}"/>
 
-    <bean id="ieDriverConfig" class="com.ehabibov.driver.config.IeDriverConfig"
-          c:port="${browser.driver.port}"
-          c:startArguments="#{'${ie.start.arguments}'.split(',')}"/>
+    <bean id="internetExplorerDriverConfig" class="com.ehabibov.driver.config.InternetExplorerDriverConfig"
+          p:port="${browser.driver.port}"
+          p:args="#{'${ie.start.arguments}'.split(',')}"/>
 
     <bean id="edgeDriverConfig" class="com.ehabibov.driver.config.EdgeDriverConfig"
-          c:port="${browser.driver.port}"
-          c:startArguments="#{'${edge.start.arguments}'.split(',')}"/>
+          p:port="${browser.driver.port}"
+          p:args="#{'${edge.start.arguments}'.split(',')}"/>
 
     <bean id="safariDriverConfig" class="com.ehabibov.driver.config.SafariDriverConfig"
-          c:port="${browser.driver.port}"
-          c:startArguments="#{'${safari.start.arguments}'.split(',')}"/>
+          p:port="${browser.driver.port}"
+          p:args="#{'${safari.start.arguments}'.split(',')}"/>
 
 
 
@@ -77,9 +77,9 @@
           p:binaryConfig-ref="commonDriverBinaryConfig"
           p:operaDriverConfig-ref="operaDriverConfig"/>
 
-    <bean id="ieDriverManager" class="com.ehabibov.driver.manager.browser.IeDriverManager"
+    <bean id="internetExplorerDriverManager" class="com.ehabibov.driver.manager.browser.InternetExplorerDriverManager"
           p:binaryConfig-ref="commonDriverBinaryConfig"
-          p:ieDriverConfig-ref="ieDriverConfig"/>
+          p:internetExplorerDriverConfig-ref="internetExplorerDriverConfig"/>
 
     <bean id="edgeDriverManager" class="com.ehabibov.driver.manager.browser.EdgeDriverManager"
           p:binaryConfig-ref="commonDriverBinaryConfig"
@@ -92,13 +92,13 @@
 
 
     <bean name="driverManager" class="com.ehabibov.driver.manager.DriverManagerFactory" init-method="getObject"
-         p:driverType="${browser.type}"
-         p:chromeDriverManager-ref="chromeDriverManager"
-         p:firefoxDriverManager-ref="firefoxDriverManager"
-         p:safariDriverManager-ref="safariDriverManager"
-         p:ieDriverManager-ref="ieDriverManager"
-         p:edgeDriverManager-ref="edgeDriverManager"
-         p:operaDriverManager-ref="operaDriverManager"/>
+          p:driverType="${browser.type}"
+          p:chromeDriverManager-ref="chromeDriverManager"
+          p:firefoxDriverManager-ref="firefoxDriverManager"
+          p:safariDriverManager-ref="safariDriverManager"
+          p:internetExplorerDriverManager-ref="internetExplorerDriverManager"
+          p:edgeDriverManager-ref="edgeDriverManager"
+          p:operaDriverManager-ref="operaDriverManager"/>
 
     <bean id="contextProvider" class="com.ehabibov.context.ApplicationContextProvider"/>
 

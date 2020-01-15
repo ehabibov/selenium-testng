@@ -16,8 +16,8 @@ public class EdgeDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments(args);
+        options = new EdgeOptions();
+        /*options.addArguments(args);
         options.addEncodedExtensions();
         options.addExtensions(extensions);
         options.setAcceptInsecureCerts(acceptInsecureCerts);
@@ -28,7 +28,7 @@ public class EdgeDriverConfig implements DriverConfig {
         options.setPageLoadStrategy();
         options.setProxy(proxy);
         options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
+        options.setUnhandledPromptBehaviour();*/
     }
 
     public EdgeOptions getOptions() {
@@ -37,7 +37,7 @@ public class EdgeDriverConfig implements DriverConfig {
     }
 
     public Proxy setProxy(){
-        proxy = new Proxy();
+        /*proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -47,6 +47,15 @@ public class EdgeDriverConfig implements DriverConfig {
         proxy.setSocksProxy();
         proxy.setSocksUsername();
         proxy.setSocksVersion();
-        proxy.setSslProxy();
+        proxy.setSslProxy();*/
+        return proxy;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setArgs(List<String> args) {
+        this.args = args;
     }
 }

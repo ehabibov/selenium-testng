@@ -16,8 +16,8 @@ public class FirefoxDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        FirefoxOptions options = new FirefoxOptions();
-        options.addArguments(args);
+        options = new FirefoxOptions();
+        /*options.addArguments(args);
         options.addPreference();
         options.setAcceptInsecureCerts(acceptInsecureCerts);
         options.setBinary();
@@ -29,7 +29,7 @@ public class FirefoxDriverConfig implements DriverConfig {
         options.setProfile();
         options.setProxy(proxy);
         options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
+        options.setUnhandledPromptBehaviour();*/
     }
 
     public FirefoxOptions getOptions() {
@@ -38,7 +38,7 @@ public class FirefoxDriverConfig implements DriverConfig {
     }
 
     public Proxy setProxy(){
-        proxy = new Proxy();
+        /*proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -48,6 +48,15 @@ public class FirefoxDriverConfig implements DriverConfig {
         proxy.setSocksProxy();
         proxy.setSocksUsername();
         proxy.setSocksVersion();
-        proxy.setSslProxy();
+        proxy.setSslProxy();*/
+        return proxy;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    public void setArgs(List<String> args) {
+        this.args = args;
     }
 }

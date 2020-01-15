@@ -5,12 +5,13 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.driver.config.OperaDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class OperaDriverManager extends DriverManager {
+public class OperaDriverManager extends DriverManager<OperaDriver> {
 
     private OperaDriverService service;
     private OperaDriverConfig config;
@@ -28,9 +29,9 @@ public class OperaDriverManager extends DriverManager {
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingPort(0)
 
-                    .withLogFile(file)
-                    .withEnvironment(map)
-                    .withSilent(true)
+                    .withLogFile(new File("file"))
+                    .withEnvironment(new HashMap<>())
+                    //.withSilent(true)
                     .withVerbose(true)
                     .build();
         }
