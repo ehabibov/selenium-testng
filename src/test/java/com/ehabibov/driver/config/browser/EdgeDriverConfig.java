@@ -1,13 +1,13 @@
-package com.ehabibov.driver.config;
+package com.ehabibov.driver.config.browser;
 
-import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class InternetExplorerDriverConfig implements DriverConfig {
+public class EdgeDriverConfig implements DriverConfig {
 
-    private InternetExplorerOptions options;
+    private EdgeOptions options;
     private String port;
     private List<String> args;
     private List<File> extensions;
@@ -16,31 +16,22 @@ public class InternetExplorerDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        options = new InternetExplorerOptions();
-        /*options.addCommandSwitches();
-        options.destructivelyEnsureCleanSession();
-        options.disableNativeEvents();
-        options.elementScrollTo();
-        options.enablePersistentHovering();
-        options.ignoreZoomSettings();
-        options.introduceFlakinessByIgnoringSecurityDomains();
-        options.requireWindowFocus();
+        options = new EdgeOptions();
+        /*options.addArguments(args);
+        options.addEncodedExtensions();
+        options.addExtensions(extensions);
+        options.setAcceptInsecureCerts(acceptInsecureCerts);
+        options.setBinary();
         options.setCapability();
+        options.setExperimentalOption();
+        options.setHeadless(headless);
         options.setPageLoadStrategy();
         options.setProxy(proxy);
         options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
-        options.takeFullPageScreenshot();
-        options.useCreateProcessApiToLaunchIe();
-        options.usePerProcessProxy();
-        options.useShellWindowsApiToAttachToIe();
-        options.waitForUploadDialogUpTo();
-        options.withAttachTimeout();
-        options.withInitialBrowserUrl();
-        options.asMap();*/
+        options.setUnhandledPromptBehaviour();*/
     }
 
-    public InternetExplorerOptions getOptions() {
+    public EdgeOptions getOptions() {
         this.initOptions();
         return this.options;
     }

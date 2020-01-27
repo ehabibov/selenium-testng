@@ -1,4 +1,4 @@
-package com.ehabibov.context;
+package com.ehabibov.driver.config;
 
 public class ApplicationConfig {
 

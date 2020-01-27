@@ -1,13 +1,13 @@
-package com.ehabibov.driver.config;
+package com.ehabibov.driver.config.browser;
 
-import org.openqa.selenium.safari.SafariOptions;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class SafariDriverConfig implements DriverConfig {
+public class OperaDriverConfig implements DriverConfig {
 
-    private SafariOptions options;
+    private OperaOptions options;
     private String port;
     private List<String> args;
     private List<File> extensions;
@@ -16,25 +16,27 @@ public class SafariDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        options = new SafariOptions();
-        /*options.setAcceptInsecureCerts();
-        options.setAutomaticInspection();
-        options.setAutomaticProfiling();
+        options = new OperaOptions();
+        /*options.addArguments(args);
+        options.addExtensions(extensions);
+        options.addEncodedExtensions();
+        options.setAcceptInsecureCerts(acceptInsecureCerts);
+        options.setBinary();
         options.setCapability();
+        options.setExperimentalOption();
         options.setPageLoadStrategy();
         options.setProxy(proxy);
         options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
-        options.setUseTechnologyPreview();*/
+        options.setUnhandledPromptBehaviour();*/
     }
 
-    public SafariOptions getOptions() {
+    public OperaOptions getOptions() {
         this.initOptions();
         return this.options;
     }
 
     public Proxy setProxy(){
-        /*proxy = new Proxy();
+    /*    proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -55,4 +57,5 @@ public class SafariDriverConfig implements DriverConfig {
     public void setArgs(List<String> args) {
         this.args = args;
     }
+
 }

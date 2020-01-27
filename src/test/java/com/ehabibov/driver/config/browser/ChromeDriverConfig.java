@@ -1,13 +1,13 @@
-package com.ehabibov.driver.config;
+package com.ehabibov.driver.config.browser;
 
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class FirefoxDriverConfig implements DriverConfig {
+public class ChromeDriverConfig implements DriverConfig {
 
-    private FirefoxOptions options;
+    private ChromeOptions options;
     private String port;
     private List<String> args;
     private List<File> extensions;
@@ -16,23 +16,22 @@ public class FirefoxDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        options = new FirefoxOptions();
+        options = new ChromeOptions();
         /*options.addArguments(args);
-        options.addPreference();
+        options.addExtensions(extensions);
+        options.addEncodedExtensions();
         options.setAcceptInsecureCerts(acceptInsecureCerts);
         options.setBinary();
         options.setCapability();
+        options.setExperimentalOption();
         options.setHeadless(headless);
-        options.setLegacy();
-        options.setLogLevel()
         options.setPageLoadStrategy();
-        options.setProfile();
-        options.setProxy(proxy);
         options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();*/
+        options.setUnhandledPromptBehaviour();
+        options.setProxy(proxy);*/
     }
 
-    public FirefoxOptions getOptions() {
+    public ChromeOptions getOptions() {
         this.initOptions();
         return this.options;
     }
@@ -59,4 +58,5 @@ public class FirefoxDriverConfig implements DriverConfig {
     public void setArgs(List<String> args) {
         this.args = args;
     }
+
 }

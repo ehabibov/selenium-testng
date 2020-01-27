@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.OperaDriverConfig;
+import com.ehabibov.driver.config.browser.OperaDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class OperaDriverManager extends DriverManager<OperaDriver> {

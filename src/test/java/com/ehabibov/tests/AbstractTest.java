@@ -6,14 +6,16 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
 import com.ehabibov.context.ApplicationContextSingleton;
+import com.ehabibov.driver.config.ApplicationConfig;
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.listeners.SeleniumSuiteListener;
-import com.ehabibov.listeners.SeleniumTestListener;
+import com.ehabibov.listeners.test.SeleniumSuiteListener;
+import com.ehabibov.listeners.test.SeleniumTestListener;
 
 @Listeners({SeleniumSuiteListener.class, SeleniumTestListener.class})
 public abstract class AbstractTest {
 
     protected ApplicationContext context;
+    protected ApplicationConfig appConfig;
     protected DriverManager<?> manager;
     protected WebDriver driver;
 
@@ -21,6 +23,7 @@ public abstract class AbstractTest {
     public void getCtx(){
         context = ApplicationContextSingleton.getContext();
         manager = (DriverManager<?>) context.getBean("driverManager");
+        appConfig = context.getBean(ApplicationConfig.class);
         driver = manager.getDriver();
     }
 }

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import com.ehabibov.context.ApplicationContextProvider;
-import com.ehabibov.context.ApplicationConfig;
+import com.ehabibov.driver.config.ApplicationConfig;
 import com.ehabibov.driver.manager.DriverManager;
 import com.ehabibov.locators.LocatorRepository;
 import com.ehabibov.listeners.driver.DriverListener;

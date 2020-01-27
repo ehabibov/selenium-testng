@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.SafariDriverConfig;
+import com.ehabibov.driver.config.browser.SafariDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class SafariDriverManager extends DriverManager<SafariDriver> {

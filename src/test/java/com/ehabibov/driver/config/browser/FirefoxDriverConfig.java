@@ -1,13 +1,13 @@
-package com.ehabibov.driver.config;
+package com.ehabibov.driver.config.browser;
 
-import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class OperaDriverConfig implements DriverConfig {
+public class FirefoxDriverConfig implements DriverConfig {
 
-    private OperaOptions options;
+    private FirefoxOptions options;
     private String port;
     private List<String> args;
     private List<File> extensions;
@@ -16,27 +16,29 @@ public class OperaDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        options = new OperaOptions();
+        options = new FirefoxOptions();
         /*options.addArguments(args);
-        options.addExtensions(extensions);
-        options.addEncodedExtensions();
+        options.addPreference();
         options.setAcceptInsecureCerts(acceptInsecureCerts);
         options.setBinary();
         options.setCapability();
-        options.setExperimentalOption();
+        options.setHeadless(headless);
+        options.setLegacy();
+        options.setLogLevel()
         options.setPageLoadStrategy();
+        options.setProfile();
         options.setProxy(proxy);
         options.setStrictFileInteractability();
         options.setUnhandledPromptBehaviour();*/
     }
 
-    public OperaOptions getOptions() {
+    public FirefoxOptions getOptions() {
         this.initOptions();
         return this.options;
     }
 
     public Proxy setProxy(){
-    /*    proxy = new Proxy();
+        /*proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
         proxy.setHttpProxy();
@@ -57,5 +59,4 @@ public class OperaDriverConfig implements DriverConfig {
     public void setArgs(List<String> args) {
         this.args = args;
     }
-
 }

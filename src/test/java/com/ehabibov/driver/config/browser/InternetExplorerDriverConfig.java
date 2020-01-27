@@ -1,13 +1,13 @@
-package com.ehabibov.driver.config;
+package com.ehabibov.driver.config.browser;
 
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class ChromeDriverConfig implements DriverConfig {
+public class InternetExplorerDriverConfig implements DriverConfig {
 
-    private ChromeOptions options;
+    private InternetExplorerOptions options;
     private String port;
     private List<String> args;
     private List<File> extensions;
@@ -16,22 +16,31 @@ public class ChromeDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        options = new ChromeOptions();
-        /*options.addArguments(args);
-        options.addExtensions(extensions);
-        options.addEncodedExtensions();
-        options.setAcceptInsecureCerts(acceptInsecureCerts);
-        options.setBinary();
+        options = new InternetExplorerOptions();
+        /*options.addCommandSwitches();
+        options.destructivelyEnsureCleanSession();
+        options.disableNativeEvents();
+        options.elementScrollTo();
+        options.enablePersistentHovering();
+        options.ignoreZoomSettings();
+        options.introduceFlakinessByIgnoringSecurityDomains();
+        options.requireWindowFocus();
         options.setCapability();
-        options.setExperimentalOption();
-        options.setHeadless(headless);
         options.setPageLoadStrategy();
+        options.setProxy(proxy);
         options.setStrictFileInteractability();
         options.setUnhandledPromptBehaviour();
-        options.setProxy(proxy);*/
+        options.takeFullPageScreenshot();
+        options.useCreateProcessApiToLaunchIe();
+        options.usePerProcessProxy();
+        options.useShellWindowsApiToAttachToIe();
+        options.waitForUploadDialogUpTo();
+        options.withAttachTimeout();
+        options.withInitialBrowserUrl();
+        options.asMap();*/
     }
 
-    public ChromeOptions getOptions() {
+    public InternetExplorerOptions getOptions() {
         this.initOptions();
         return this.options;
     }
@@ -58,5 +67,4 @@ public class ChromeDriverConfig implements DriverConfig {
     public void setArgs(List<String> args) {
         this.args = args;
     }
-
 }

@@ -1,13 +1,13 @@
-package com.ehabibov.driver.config;
+package com.ehabibov.driver.config.browser;
 
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.Proxy;
 import java.util.List;
 import java.io.File;
 
-public class EdgeDriverConfig implements DriverConfig {
+public class SafariDriverConfig implements DriverConfig {
 
-    private EdgeOptions options;
+    private SafariOptions options;
     private String port;
     private List<String> args;
     private List<File> extensions;
@@ -16,22 +16,19 @@ public class EdgeDriverConfig implements DriverConfig {
     private Proxy proxy;
 
     public void initOptions(){
-        options = new EdgeOptions();
-        /*options.addArguments(args);
-        options.addEncodedExtensions();
-        options.addExtensions(extensions);
-        options.setAcceptInsecureCerts(acceptInsecureCerts);
-        options.setBinary();
+        options = new SafariOptions();
+        /*options.setAcceptInsecureCerts();
+        options.setAutomaticInspection();
+        options.setAutomaticProfiling();
         options.setCapability();
-        options.setExperimentalOption();
-        options.setHeadless(headless);
         options.setPageLoadStrategy();
         options.setProxy(proxy);
         options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();*/
+        options.setUnhandledPromptBehaviour();
+        options.setUseTechnologyPreview();*/
     }
 
-    public EdgeOptions getOptions() {
+    public SafariOptions getOptions() {
         this.initOptions();
         return this.options;
     }

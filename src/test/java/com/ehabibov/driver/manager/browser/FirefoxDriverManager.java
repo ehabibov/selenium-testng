@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.FirefoxDriverConfig;
+import com.ehabibov.driver.config.browser.FirefoxDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class FirefoxDriverManager extends DriverManager<FirefoxDriver> {

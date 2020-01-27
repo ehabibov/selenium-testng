@@ -1,4 +1,4 @@
-package com.ehabibov.driver.config;
+package com.ehabibov.driver.config.browser;
 
 public interface DriverConfig {
 

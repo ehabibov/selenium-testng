@@ -8,8 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ehabibov.driver.config.InternetExplorerDriverConfig;
 import com.ehabibov.driver.manager.DriverManager;
+import com.ehabibov.driver.config.browser.InternetExplorerDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class InternetExplorerDriverManager extends DriverManager<InternetExplorerDriver> {

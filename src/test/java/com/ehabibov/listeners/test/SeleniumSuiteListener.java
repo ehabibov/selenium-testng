@@ -1,4 +1,4 @@
-package com.ehabibov.listeners;
+package com.ehabibov.listeners.test;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.ISuiteListener;

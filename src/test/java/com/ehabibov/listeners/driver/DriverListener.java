@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-
 import java.util.Arrays;
 
 public class DriverListener extends AbstractWebDriverEventListener {

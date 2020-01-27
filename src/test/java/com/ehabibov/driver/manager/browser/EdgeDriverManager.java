@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.EdgeDriverConfig;
+import com.ehabibov.driver.config.browser.EdgeDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
 public class EdgeDriverManager extends DriverManager<EdgeDriver> {
