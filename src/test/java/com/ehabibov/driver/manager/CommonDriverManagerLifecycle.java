@@ -3,17 +3,13 @@ package com.ehabibov.driver.manager;
 import org.openqa.selenium.WebDriver;
 import com.ehabibov.driver.binary.DriverBinaryConfig;
 
-public abstract class DriverManager<T extends WebDriver> {
+public abstract class CommonDriverManagerLifecycle extends DriverManagerLifecycle {
 
-    protected T driver;
     protected DriverBinaryConfig driverBinaryConfig;
-
-    protected abstract void prepareService();
     protected abstract void startService();
     protected abstract void stopService();
-    protected abstract void createDriver();
 
-    public T getDriver() {
+    public WebDriver getDriver() {
         if (driver == null) {
             this.prepareService();
             this.startService();
@@ -27,6 +23,7 @@ public abstract class DriverManager<T extends WebDriver> {
             driver.quit();
             driver = null;
         }
+        this.stopService();
     }
 
     public void setBinaryConfig(DriverBinaryConfig driverBinaryConfig) {

@@ -8,11 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ehabibov.driver.manager.DriverManager;
+import com.ehabibov.driver.manager.CommonDriverManagerLifecycle;
 import com.ehabibov.driver.config.browser.FirefoxDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class FirefoxDriverManager extends DriverManager<FirefoxDriver> {
+public class FirefoxDriverManager extends CommonDriverManagerLifecycle {
 
     private FirefoxDriverService service;
     private FirefoxDriverConfig config;

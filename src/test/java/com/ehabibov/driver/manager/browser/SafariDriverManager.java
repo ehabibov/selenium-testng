@@ -7,11 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ehabibov.driver.manager.DriverManager;
+import com.ehabibov.driver.manager.CommonDriverManagerLifecycle;
 import com.ehabibov.driver.config.browser.SafariDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class SafariDriverManager extends DriverManager<SafariDriver> {
+public class SafariDriverManager extends CommonDriverManagerLifecycle {
 
     private SafariDriverService service;
     private SafariDriverConfig config;
@@ -38,7 +38,7 @@ public class SafariDriverManager extends DriverManager<SafariDriver> {
     }
 
     @Override
-    public void startService(){
+    public void startService() {
         try {
             service.start();
         } catch (IOException e) {
@@ -48,7 +48,7 @@ public class SafariDriverManager extends DriverManager<SafariDriver> {
 
     @Override
     public void stopService() {
-        if (service != null  && service.isRunning())
+        if (service != null && service.isRunning())
             service.stop();
     }
 

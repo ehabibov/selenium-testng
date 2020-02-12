@@ -11,23 +11,24 @@ public class ChromeDriverConfig implements DriverConfig {
     private String port;
     private List<String> args;
     private List<File> extensions;
+    private List<String> encodedExtensions;
     private boolean headless;
     private boolean acceptInsecureCerts;
     private Proxy proxy;
 
     public void initOptions(){
-        options = new ChromeOptions();
-        /*options.addArguments(args);
+        /*options = new ChromeOptions();
+        options.addArguments(args);
         options.addExtensions(extensions);
-        options.addEncodedExtensions();
+        options.addEncodedExtensions(encodedExtensions);
         options.setAcceptInsecureCerts(acceptInsecureCerts);
         options.setBinary();
         options.setCapability();
         options.setExperimentalOption();
         options.setHeadless(headless);
-        options.setPageLoadStrategy();
-        options.setStrictFileInteractability();
-        options.setUnhandledPromptBehaviour();
+        options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+        options.setStrictFileInteractability(true);
+        options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
         options.setProxy(proxy);*/
     }
 
@@ -58,5 +59,4 @@ public class ChromeDriverConfig implements DriverConfig {
     public void setArgs(List<String> args) {
         this.args = args;
     }
-
 }

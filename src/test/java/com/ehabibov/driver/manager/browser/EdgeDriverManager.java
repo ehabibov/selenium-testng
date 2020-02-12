@@ -1,18 +1,18 @@
 package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.edge.ChromiumEdgeDriverService;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ehabibov.driver.manager.DriverManager;
+import com.ehabibov.driver.manager.CommonDriverManagerLifecycle;
 import com.ehabibov.driver.config.browser.EdgeDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class EdgeDriverManager extends DriverManager<EdgeDriver> {
+public class EdgeDriverManager extends CommonDriverManagerLifecycle {
 
     private EdgeDriverService service;
     private EdgeDriverConfig config;
@@ -61,5 +61,4 @@ public class EdgeDriverManager extends DriverManager<EdgeDriver> {
         driver = new EdgeDriver(options);
         new CapabilitiesPrinter(driver).printCapabilities();
     }
-
 }

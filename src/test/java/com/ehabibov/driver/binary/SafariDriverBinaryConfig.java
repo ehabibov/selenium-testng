@@ -8,6 +8,7 @@ public class SafariDriverBinaryConfig implements DriverBinaryConfig {
         this.driverBinaryFolder = driverBinaryFolder;
     }
 
+    //TODO: segregate interface
     @Override
     public void init() {
 
@@ -16,5 +17,4 @@ public class SafariDriverBinaryConfig implements DriverBinaryConfig {
     public String getBinaryPath() {
         return driverBinaryFolder;
     }
-
 }

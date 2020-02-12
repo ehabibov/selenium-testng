@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import com.ehabibov.locators.LoginPageOR;
+import com.ehabibov.locators.HomePageOR;
 
 public class LoginPage extends AbstractPage {
 
@@ -31,6 +32,7 @@ public class LoginPage extends AbstractPage {
         driver.executeScript("document.querySelector(\"input[type='password']\").click()");
         objectRepository.getPassword().sendKeys(password);
         driver.executeScript("document.querySelector(\"input[type='submit']\").click()");
+        this.waitForElementExist(HomePageOR.getTrait(), 15, 3);
     }
 
     private void loginForAll(String username, String password){
@@ -39,5 +41,6 @@ public class LoginPage extends AbstractPage {
         objectRepository.getPassword().click();
         objectRepository.getPassword().sendKeys(password);
         objectRepository.getButton().click();
+        this.waitForElementExist(HomePageOR.getTrait(), 15, 3);
     }
 }

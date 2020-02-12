@@ -2,33 +2,28 @@ package com.ehabibov.driver.manager.browser;
 
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.Capabilities;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+import com.ehabibov.driver.manager.CommonDriverManagerLifecycle;
+import com.ehabibov.driver.config.OptionsFetcher;
+import com.ehabibov.driver.config.browser.ChromeOptionsHolder;
 import com.ehabibov.driver.CapabilitiesPrinter;
-import com.ehabibov.driver.manager.DriverManager;
-import com.ehabibov.driver.config.browser.ChromeDriverConfig;
 
-public class ChromeDriverManager extends DriverManager<ChromeDriver> {
+public class ChromeDriverManager extends CommonDriverManagerLifecycle {
 
+    private OptionsFetcher optionsFetcher = new OptionsFetcher(ChromeOptionsHolder.class);
     private ChromeDriverService service;
-    private ChromeDriverConfig config;
-    private ChromeOptions options;
+    private Capabilities capabilities;
 
-    public void setChromeDriverConfig(ChromeDriverConfig chromeDriverConfig) {
-        this.config = chromeDriverConfig;
-    }
-
-    @Override
     protected void prepareService() {
         if (service == null) {
             driverBinaryConfig.init();
             service = new ChromeDriverService.Builder()
                     .usingDriverExecutable(new File(driverBinaryConfig.getBinaryPath()))
                     .usingPort(0)
-
                     .withEnvironment(new HashMap<>())
                     .withLogFile(new File("file"))
                     //.withSilent(true)
@@ -36,7 +31,7 @@ public class ChromeDriverManager extends DriverManager<ChromeDriver> {
                     .withVerbose(true)
                     .build();
         }
-        options = config.getOptions();
+        capabilities = optionsFetcher.getOptions();
     }
 
     @Override
@@ -56,8 +51,7 @@ public class ChromeDriverManager extends DriverManager<ChromeDriver> {
 
     @Override
     public void createDriver() {
-        driver = new ChromeDriver(service, options);
+        driver = new ChromeDriver(service, capabilities);
         new CapabilitiesPrinter(driver).printCapabilities();
     }
-
 }

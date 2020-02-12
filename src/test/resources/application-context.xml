@@ -4,7 +4,10 @@
        xmlns:c="http://www.springframework.org/schema/c"
        xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
 
     <context:component-scan base-package="com.ehabibov.context"/>
     <bean id="propertyConfigurer" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
@@ -14,6 +17,7 @@
                 <value>classpath:browsers/*.properties</value>
             </list>
         </property>
+        <property name="trimValues" value="true"/>
         <property name="nullValue" value="nil"/>
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
     </bean>
@@ -22,16 +26,14 @@
     <bean id="applicationConfig" class="com.ehabibov.driver.config.ApplicationConfig"
           p:applicationHost="${application.host}"
           p:applicationPort="${application.port}"
-          p:browserType="${browser.type}"/>
+          p:browserType="${browser.type}"
+          p:remoteDriver="${remote.driver}"
+          p:remoteDriverUrl="${remote.driver.url}"/>
 
     <bean name="driverManager" class="com.ehabibov.driver.manager.DriverManagerFactory" init-method="getObject"
-          p:driverType="${browser.type}"
-          p:chromeDriverManager-ref="chromeDriverManager"
-          p:firefoxDriverManager-ref="firefoxDriverManager"
-          p:safariDriverManager-ref="safariDriverManager"
-          p:internetExplorerDriverManager-ref="internetExplorerDriverManager"
-          p:edgeDriverManager-ref="edgeDriverManager"
-          p:operaDriverManager-ref="operaDriverManager"/>
+          p:driverType="${browser.type}"/>
+
+    <bean id="remoteDriverManager" class="com.ehabibov.driver.manager.browser.RemoteDriverManager"/>
 
     <bean id="commonDriverBinaryConfig" class="com.ehabibov.driver.binary.CommonDriverBinaryConfig"
           c:browserType="${browser.type}"
@@ -81,8 +83,7 @@
 
 
     <bean id="chromeDriverManager" class="com.ehabibov.driver.manager.browser.ChromeDriverManager"
-          p:binaryConfig-ref="commonDriverBinaryConfig"
-          p:chromeDriverConfig-ref="chromeDriverConfig"/>
+          p:binaryConfig-ref="commonDriverBinaryConfig"/>
 
     <bean id="firefoxDriverManager" class="com.ehabibov.driver.manager.browser.FirefoxDriverManager"
           p:binaryConfig-ref="commonDriverBinaryConfig"
@@ -104,4 +105,37 @@
           p:binaryConfig-ref="safariDriverBinaryConfig"
           p:safariDriverConfig-ref="safariDriverConfig"/>
 
+
+
+    <bean id="chromeOptionsHolder" class="com.ehabibov.driver.config.browser.ChromeOptionsHolder"
+          p:acceptInsecureCerts="${chrome.option.accept.insecure.certs:false}"
+          p:strictFileInteractability="${chrome.option.strict.file.interactability:false}"
+          p:unhandledPromptBehaviour="${chrome.option.unhandled.prompt.behaviour:dismiss}"
+          p:pageLoadStrategy="${chrome.option.page.load.strategy:normal}"
+          p:headless="${chrome.option.headless:false}"
+          p:extensions="#{'${chrome.option.extension.paths:nil}'.split(',')}"
+          p:capabilities="#{'${chrome.option.capabilities:nil}'.split(',')}"
+          p:arguments="#{'${chrome.option.start.arguments:nil}'.split(',')}"/>
+
+    <bean id="remoteOptionsHolder" class="com.ehabibov.driver.config.browser.RemoteOptionsHolder"
+          p:browserType="${browser.type:chrome}"
+          p:browserVersion="${remote.browser.version:78}"
+          p:enableLogging="${remote.logging.enabled:true}"
+          p:enableRecording="${remote.recording.enabled:true}"
+          p:enableVNC="${remote.vnc.enabled:true}"
+          p:executionName="${remote.test.run.name:Generic execution}"
+          p:recordingFramerate="${remote.recording.framerate:24}"/>
+
+    <bean id="proxy" class="org.openqa.selenium.Proxy"
+          p:autodetect="false"
+          p:ftpProxy=""
+          p:httpProxy=""
+          p:noProxy=""
+          p:proxyType="AUTODETECT"
+          p:proxyAutoconfigUrl=""
+          p:socksProxy=""
+          p:socksVersion=""
+          p:socksUsername=""
+          p:socksPassword=""
+          p:sslProxy=""/>
 </beans>

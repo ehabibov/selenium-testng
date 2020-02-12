@@ -8,11 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ehabibov.driver.manager.DriverManager;
+import com.ehabibov.driver.manager.CommonDriverManagerLifecycle;
 import com.ehabibov.driver.config.browser.InternetExplorerDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class InternetExplorerDriverManager extends DriverManager<InternetExplorerDriver> {
+public class InternetExplorerDriverManager extends CommonDriverManagerLifecycle {
 
     private InternetExplorerDriverService service;
     private InternetExplorerDriverConfig config;
@@ -52,7 +52,7 @@ public class InternetExplorerDriverManager extends DriverManager<InternetExplore
 
     @Override
     public void stopService() {
-        if (service !=null && service.isRunning())
+        if (service != null && service.isRunning())
             service.stop();
     }
 

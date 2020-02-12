@@ -15,8 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import com.ehabibov.context.ApplicationContextSingleton;
-import com.ehabibov.driver.manager.DriverManager;
+import com.ehabibov.driver.manager.DriverManagerHolder;
 
 public class SeleniumTestListener implements ITestListener {
 
@@ -27,8 +26,7 @@ public class SeleniumTestListener implements ITestListener {
     @Override
     public void onStart(ITestContext context) {
         log.info("test onStart");
-        DriverManager<?> manager = (DriverManager<?>) ApplicationContextSingleton.getContext().getBean("driverManager");
-        this.driver = manager.getDriver();
+        this.driver = DriverManagerHolder.Driver.getDriver();
     }
 
     @Override

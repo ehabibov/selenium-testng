@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <selenium.version>4.0.0-alpha-3</selenium.version>
+        <selenium.version>4.0.0-alpha-4</selenium.version>
         <webdriver.downloader.version>3.7.1</webdriver.downloader.version>
         <testng.version>7.0.0</testng.version>
         <spring.version>5.2.2.RELEASE</spring.version>
@@ -24,11 +24,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>

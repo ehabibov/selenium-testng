@@ -1,41 +1,38 @@
 package com.ehabibov.driver.manager;
 
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.context.ApplicationContext;
 
+import com.ehabibov.context.ApplicationContextSingleton;
 import com.ehabibov.driver.manager.browser.*;
 import com.ehabibov.driver.DriverType;
 
-public class DriverManagerFactory implements FactoryBean<DriverManager<?>> {
+public class DriverManagerFactory implements FactoryBean<DriverManagerLifecycle> {
 
     public DriverType driverType;
-    public ChromeDriverManager chromeDriverManager;
-    public FirefoxDriverManager firefoxDriverManager;
-    public SafariDriverManager safariDriverManager;
-    public InternetExplorerDriverManager internetExplorerDriverManager;
-    public EdgeDriverManager edgeDriverManager;
-    public OperaDriverManager operaDriverManager;
 
     @Override
-    public DriverManager<?> getObject() {
-        DriverManager<?> driverManager;
+    public DriverManagerLifecycle getObject() {
+        ApplicationContext context = ApplicationContextSingleton.getContext();
+        DriverManagerLifecycle driverManager;
         switch (driverType) {
             case CHROME:
-                driverManager = this.chromeDriverManager;
+                driverManager = context.getBean(ChromeDriverManager.class);
                 break;
             case FIREFOX:
-                driverManager = this.firefoxDriverManager;
+                driverManager = context.getBean(FirefoxDriverManager.class);
                 break;
             case OPERA:
-                driverManager = this.operaDriverManager;
+                driverManager = context.getBean(OperaDriverManager.class);
                 break;
             case IE:
-                driverManager = this.internetExplorerDriverManager;
+                driverManager = context.getBean(InternetExplorerDriverManager.class);
                 break;
             case EDGE:
-                driverManager = this.edgeDriverManager;
+                driverManager = context.getBean(EdgeDriverManager.class);
                 break;
             case SAFARI:
-                driverManager = this.safariDriverManager;
+                driverManager = context.getBean(SafariDriverManager.class);
                 break;
             default:
                 throw new IllegalArgumentException("Browser not exists: " + driverType.toString());
@@ -44,8 +41,8 @@ public class DriverManagerFactory implements FactoryBean<DriverManager<?>> {
     }
 
     @Override
-    public Class<DriverManager> getObjectType() {
-        return DriverManager.class;
+    public Class<DriverManagerLifecycle> getObjectType() {
+        return DriverManagerLifecycle.class;
     }
 
     @Override
@@ -54,30 +51,7 @@ public class DriverManagerFactory implements FactoryBean<DriverManager<?>> {
     }
 
     public void setDriverType(String driverType) {
-        this.driverType = DriverType.valueOf(driverType.toUpperCase()) ;
+        this.driverType = DriverType.valueOf(driverType.toUpperCase());
     }
 
-    public void setChromeDriverManager(ChromeDriverManager chromeDriverManager) {
-        this.chromeDriverManager = chromeDriverManager;
-    }
-
-    public void setFirefoxDriverManager(FirefoxDriverManager firefoxDriverManager) {
-        this.firefoxDriverManager = firefoxDriverManager;
-    }
-
-    public void setSafariDriverManager(SafariDriverManager safariDriverManager) {
-        this.safariDriverManager = safariDriverManager;
-    }
-
-    public void setInternetExplorerDriverManager(InternetExplorerDriverManager internetExplorerDriverManager) {
-        this.internetExplorerDriverManager = internetExplorerDriverManager;
-    }
-
-    public void setEdgeDriverManager(EdgeDriverManager edgeDriverManager) {
-        this.edgeDriverManager = edgeDriverManager;
-    }
-
-    public void setOperaDriverManager(OperaDriverManager operaDriverManager) {
-        this.operaDriverManager = operaDriverManager;
-    }
 }

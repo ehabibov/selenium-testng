@@ -5,6 +5,8 @@ public class ApplicationConfig {
     private String applicationHost;
     private int applicationPort;
     private String browserType;
+    private boolean remoteDriver;
+    private String remoteDriverUrl;
 
     public String getApplicationHost() {
         return applicationHost;
@@ -28,5 +30,21 @@ public class ApplicationConfig {
 
     public void setBrowserType(String browserType) {
         this.browserType = browserType;
+    }
+
+    public boolean isRemoteDriver() {
+        return remoteDriver;
+    }
+
+    public void setRemoteDriver(boolean remoteDriver) {
+        this.remoteDriver = remoteDriver;
+    }
+
+    public String getRemoteDriverUrl() {
+        return remoteDriverUrl;
+    }
+
+    public void setRemoteDriverUrl(String remoteDriverUrl) {
+        this.remoteDriverUrl = remoteDriverUrl;
     }
 }

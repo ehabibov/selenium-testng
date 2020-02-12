@@ -26,6 +26,6 @@ public class CapabilitiesPrinter {
             String capabilityOutput = String.format("\t%s : %s\n", capabilityName, capabilityValue);
             output = output.concat(capabilityOutput);
         }
-        log.warn(output);
+        log.info(output);
     }
 }

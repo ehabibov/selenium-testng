@@ -42,10 +42,45 @@
 #    driver: local
 
 
-version: '2'
+#version: '2'
+#services:
+#  mariadb:
+#    image: 'bitnami/mariadb:10.3'
+#    environment:
+#      - MARIADB_USER=bn_suitecrm
+#      - MARIADB_DATABASE=bitnami_suitecrm
+#      - ALLOW_EMPTY_PASSWORD=yes
+#    ports:
+#      - '3306:3306'
+#    volumes:
+#      - '${MARIADB_VOLUME}:/bitnami'
+#  suitecrm:
+#    image: 'bitnami/suitecrm:7'
+#    environment:
+#      - MARIADB_HOST=mariadb
+#      - MARIADB_PORT_NUMBER=3306
+#      - SUITECRM_DATABASE_USER=bn_suitecrm
+#      - SUITECRM_DATABASE_NAME=bitnami_suitecrm
+#      - ALLOW_EMPTY_PASSWORD=yes
+#    ports:
+#      - '8080:80'
+#      - '443:443'
+#    volumes:
+#      - '${SUITECRM_VOLUME}:/bitnami'
+#    depends_on:
+#      - mariadb
+#volumes:
+#  mariadb_data:
+#    driver: local
+#  suitecrm_data:
+#    driver: local
+
+version: '3.6'
 services:
+
   mariadb:
     image: 'bitnami/mariadb:10.3'
+    container_name: bitnami_mariadb
     environment:
       - MARIADB_USER=bn_suitecrm
       - MARIADB_DATABASE=bitnami_suitecrm
@@ -54,8 +89,12 @@ services:
       - '3306:3306'
     volumes:
       - '${MARIADB_VOLUME}:/bitnami'
+    networks:
+      - crm-net
+
   suitecrm:
     image: 'bitnami/suitecrm:7'
+    container_name: bitnami_suitecrm
     environment:
       - MARIADB_HOST=mariadb
       - MARIADB_PORT_NUMBER=3306
@@ -69,8 +108,16 @@ services:
       - '${SUITECRM_VOLUME}:/bitnami'
     depends_on:
       - mariadb
+    networks:
+      - crm-net
+
 volumes:
   mariadb_data:
     driver: local
   suitecrm_data:
     driver: local
+
+networks:
+  crm-net:
+    name: crm-network
+    driver: bridge

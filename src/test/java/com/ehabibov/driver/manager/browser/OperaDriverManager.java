@@ -7,11 +7,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-import com.ehabibov.driver.manager.DriverManager;
+import com.ehabibov.driver.manager.CommonDriverManagerLifecycle;
 import com.ehabibov.driver.config.browser.OperaDriverConfig;
 import com.ehabibov.driver.CapabilitiesPrinter;
 
-public class OperaDriverManager extends DriverManager<OperaDriver> {
+public class OperaDriverManager extends CommonDriverManagerLifecycle {
 
     private OperaDriverService service;
     private OperaDriverConfig config;
@@ -49,7 +49,7 @@ public class OperaDriverManager extends DriverManager<OperaDriver> {
 
     @Override
     public void stopService() {
-        if (service !=null && service.isRunning())
+        if (service != null && service.isRunning())
             service.stop();
     }
 
