@@ -42,6 +42,7 @@ Container execution:
 `application.host=http://orangehrm`  
 `application.port=80`  
 
+Update `VIDEO_VOLUME` in `${project_dir}/docker/.env` file to absolute path to `{project_dir}/volumes/video`   
 By default, Selenoid UI (test execution process via VNC) accessible on http:/localhost:9090
 
 Before container execution specific browser version images should be downloaded.
@@ -49,6 +50,7 @@ Download [Selenoid Configuratoin Manager](https://github.com/aerokube/cm/release
 Use `{project_dir}/docker/browsers.json` for pulling required browser images as described in
 [Selenoid Doc](https://aerokube.com/selenoid/latest/#_syncing_browser_images_from_existing_file) (CM way)
 Copy `${project_dir}/docker/browsers.json` to `${project_dir}docker/volumes/selenoid-vol` directory.
+
 Test execution:  
 `mvn clean test`  
 
