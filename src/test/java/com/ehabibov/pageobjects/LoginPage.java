@@ -15,6 +15,7 @@ public class LoginPage extends AbstractPage {
     public LoginPage() {
         objectRepository = this.setObjectRepository(LoginPageOR.class);
         initPage(objectRepository);
+        driver.get(getAppUrl());
     }
 
     public HomePage login(String username, String password){

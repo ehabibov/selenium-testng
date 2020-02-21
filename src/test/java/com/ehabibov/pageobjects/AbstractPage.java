@@ -31,7 +31,7 @@ public abstract class AbstractPage {
         this.initDriver();
     }
 
-    void initDriver(){
+    protected void initDriver(){
         this.context = ApplicationContextSingleton.getContext();
         this.appConfig = context.getBean(ApplicationConfig.class);
         this.driver = DriverManagerHolder.Driver.getDriver();

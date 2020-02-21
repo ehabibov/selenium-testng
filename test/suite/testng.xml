@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="LoginSuite" parallel="false">
     <test name="Login">
-        <parameter name="username" value="user"/>
-        <parameter name="password" value="bitnami"/>
+        <parameter name="username" value="Admin"/>
+        <parameter name="password" value="Bitnami.12345"/>
         <classes>
             <class name="com.ehabibov.tests.LoginTest"/>
         </classes>
