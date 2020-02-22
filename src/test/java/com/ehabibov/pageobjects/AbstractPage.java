@@ -3,11 +3,12 @@ package com.ehabibov.pageobjects;
 import org.springframework.context.ApplicationContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import java.time.Duration;
@@ -37,8 +38,17 @@ public abstract class AbstractPage {
         this.driver = DriverManagerHolder.Driver.getDriver();
     }
 
-    void initPage(LocatorRepository locatorRepository){
+    void initLocators(LocatorRepository locatorRepository){
         PageFactory.initElements(driver, locatorRepository);
+    }
+
+    void waitForTrait(LocatorRepository locatorRepository, int timeout){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        wait.until(ExpectedConditions.presenceOfElementLocated(locatorRepository.getTrait()));
+    }
+
+    void waitForTrait(LocatorRepository locatorRepository){
+        waitForTrait(locatorRepository, 5);
     }
 
     protected <T extends LocatorRepository> T setObjectRepository(Class<T> type) {
