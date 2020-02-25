@@ -9,10 +9,10 @@ public class SystemUsersPageOR implements LocatorRepository {
     private By trait = By.id("systemUser-information");
     public By getTrait(){ return trait; }
 
-    @FindBy(id="btnAdd")                    private WebElement addUserButton;
-    @FindBy(id="searchSystemUser_userName") private WebElement searchUserField;
-    @FindBy(id = "searchBtn")               private WebElement searchUserButton;
-    @FindBy(id= "resultTable")              private WebElement usersTable;
+    @FindBy(id = "btnAdd")                    private WebElement addUserButton;
+    @FindBy(id = "searchSystemUser_userName") private WebElement searchUserField;
+    @FindBy(id = "searchBtn")                 private WebElement searchUserButton;
+    @FindBy(id = "resultTable")               private WebElement usersTable;
 
     public WebElement getAddUserButton() { return addUserButton; }
     public WebElement getSearchUserField() { return searchUserField; }

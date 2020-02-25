@@ -11,11 +11,12 @@ import com.ehabibov.pageobjects.HomePage;
 import com.ehabibov.pageobjects.LoginPage;
 import com.ehabibov.pageobjects.SystemUsersPage;
 import com.ehabibov.pageobjects.AddUserPage;
+import com.ehabibov.entities.SystemUser;
 
-import static org.testng.Assert.assertEquals;
+import static com.ehabibov.tests.CustomAsserts.*;
 
 @Listeners({SeleniumSuiteListener.class, SeleniumTestListener.class})
-public class LoginTest {
+public class CreateUserTest {
 
     @Test
     @Description("Create general user account")
@@ -24,18 +25,12 @@ public class LoginTest {
         HomePage homePage = new LoginPage().login(login,password);
         SystemUsersPage systemUsersPage = homePage.navigateToSystemUsersPage();
         AddUserPage addUserPage = systemUsersPage.navigateToAddUserPage();
-        String userRole = "ESS";
-        String employeeName = "User Last Name";
-        String userName = "userLastName";
-        String status = "Enabled";
-        String userPassword = "BRnx<s4a";
-        String confirmPassword = "BRnx<s4a";
-        systemUsersPage = addUserPage.registerUser(userRole, employeeName, userName, status, userPassword, confirmPassword);
-        SystemUsersPage.SystemUser user = systemUsersPage.getUserInfoFromTable(userName);
+        SystemUser newSystemUser = SystemUser.builder()
+                .userName("userLastName").userRole("ESS").employeeName("User Last Name")
+                .status("Enabled").password("BRnx<s4a").build();
+        systemUsersPage = addUserPage.registerUser(newSystemUser);
+        SystemUser registeredUser = systemUsersPage.getUserInfoFromTable(newSystemUser.getUserName());
 
-        assertEquals(user.getUserName(), userName);
-        assertEquals(user.getUserRole(), userRole);
-        assertEquals(user.getEmployeeName(), employeeName);
-        assertEquals(user.getStatus(), status);
+        assertObjectsEqualIgnoringFields(registeredUser, newSystemUser, SystemUser.Fields.password);
     }
 }

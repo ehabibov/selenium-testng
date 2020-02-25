@@ -2,11 +2,13 @@ package com.ehabibov.pageobjects;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
+import io.qameta.allure.Step;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import java.util.List;
 
 import com.ehabibov.locators.SystemUsersPageOR;
+import com.ehabibov.entities.SystemUser;
 
 public class SystemUsersPage extends AbstractPage {
 
@@ -19,40 +21,28 @@ public class SystemUsersPage extends AbstractPage {
         waitForTrait(objectRepository);
     }
 
+    @Step("Navigate to \"Add user\" page")
     public AddUserPage navigateToAddUserPage(){
         objectRepository.getAddUserButton().click();
         return new AddUserPage();
     }
 
-    public void searchUserByUserName(String username){
-        objectRepository.getSearchUserField().sendKeys(username);
+    @Step("Search user: {userName}")
+    public void searchUserByUserName(String userName){
+        objectRepository.getSearchUserField().sendKeys(userName);
         objectRepository.getSearchUserButton().click();
     }
 
-    public SystemUser getUserInfoFromTable(String username){
-        this.searchUserByUserName(username);
+    @Step("Getting user \"{userName}\" information from parsed table")
+    public SystemUser getUserInfoFromTable(String userName){
+        this.searchUserByUserName(userName);
         List<WebElement> userInfo = objectRepository.getUsersTable().findElements(By.tagName("td"));
-        SystemUser user = new SystemUser();
-        user.setUserName(userInfo.get(1).getText());
-        user.setUserRole(userInfo.get(2).getText());
-        user.setEmployeeName(userInfo.get(3).getText());
-        user.setStatus(userInfo.get(4).getText());
+        SystemUser user = SystemUser.builder()
+                .userName(userInfo.get(1).getText())
+                .userRole(userInfo.get(2).getText())
+                .employeeName(userInfo.get(3).getText())
+                .status(userInfo.get(4).getText()).build();
         return user;
     }
 
-    public static class SystemUser {
-        private String userName;
-        private String userRole;
-        private String employeeName;
-        private String status;
-
-        public String getUserName() { return userName; }
-        private void setUserName(String userName) { this.userName = userName; }
-        public String getUserRole() { return userRole; }
-        private void setUserRole(String userRole) { this.userRole = userRole; }
-        public String getEmployeeName() { return employeeName; }
-        private void setEmployeeName(String employeeName) { this.employeeName = employeeName; }
-        public String getStatus() { return status; }
-        private void setStatus(String status) { this.status = status; }
-    }
 }

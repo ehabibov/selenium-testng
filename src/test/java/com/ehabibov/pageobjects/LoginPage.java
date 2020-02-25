@@ -1,5 +1,6 @@
 package com.ehabibov.pageobjects;
 
+import io.qameta.allure.Step;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -17,11 +18,12 @@ public class LoginPage extends AbstractPage {
         waitForTrait(objectRepository);
     }
 
-    public HomePage login(String username, String password){
+    @Step("Logging in with \"{userName} / {password}\"")
+    public HomePage login(String userName, String password){
         if (isNotSafari()){
-            return this.loginForAll(username,password);
+            return this.loginForAll(userName, password);
         } else {
-            return this.loginForSafari(username, password);
+            return this.loginForSafari(userName, password);
         }
     }
 

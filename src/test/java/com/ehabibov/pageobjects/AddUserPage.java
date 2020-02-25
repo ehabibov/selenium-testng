@@ -1,10 +1,12 @@
 package com.ehabibov.pageobjects;
 
 import org.openqa.selenium.support.ui.Select;
+import io.qameta.allure.Step;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
 import com.ehabibov.locators.AddUserPageOR;
+import com.ehabibov.entities.SystemUser;
 
 public class AddUserPage extends AbstractPage {
 
@@ -17,16 +19,16 @@ public class AddUserPage extends AbstractPage {
         waitForTrait(objectRepository);
     }
 
-    public SystemUsersPage registerUser(String userRole, String employeeName, String userName,
-                                        String status, String password, String confirmPassword){
+    @Step("Register new user")
+    public SystemUsersPage registerUser(final SystemUser user){
         Select userRoleSelector = new Select(objectRepository.getUserRoleDropdown());
-        userRoleSelector.selectByVisibleText(userRole);
-        objectRepository.getEmployeeNameField().sendKeys(employeeName);
-        objectRepository.getUserNameField().sendKeys(userName);
+        userRoleSelector.selectByVisibleText(user.getUserRole());
+        objectRepository.getEmployeeNameField().sendKeys(user.getEmployeeName());
+        objectRepository.getUserNameField().sendKeys(user.getUserName());
         Select statusSelector = new Select(objectRepository.getStatusDropdown());
-        statusSelector.selectByVisibleText(status);
-        objectRepository.getPasswordField().sendKeys(password);
-        objectRepository.getConfirmPasswordField().sendKeys(confirmPassword);
+        statusSelector.selectByVisibleText(user.getStatus());
+        objectRepository.getPasswordField().sendKeys(user.getPassword());
+        objectRepository.getConfirmPasswordField().sendKeys(user.getPassword());
         objectRepository.getSaveUserButton().click();
         return new SystemUsersPage();
     }
