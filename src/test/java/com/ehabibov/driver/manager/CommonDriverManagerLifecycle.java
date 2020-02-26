@@ -26,7 +26,7 @@ public abstract class CommonDriverManagerLifecycle extends DriverManagerLifecycl
         this.stopService();
     }
 
-    public void setBinaryConfig(DriverBinaryConfig driverBinaryConfig) {
+    public void setBinaryConfig(final DriverBinaryConfig driverBinaryConfig) {
         this.driverBinaryConfig = driverBinaryConfig;
     }
 }

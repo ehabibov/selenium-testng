@@ -3,6 +3,7 @@ package com.ehabibov.driver.manager.browser;
 import org.openqa.selenium.opera.OperaDriverService;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class OperaDriverManager extends CommonDriverManagerLifecycle {
     private OperaDriverConfig config;
     private OperaOptions options;
 
-    public void setOperaDriverConfig(OperaDriverConfig operaDriverConfig) {
+    public void setOperaDriverConfig(final OperaDriverConfig operaDriverConfig) {
         this.config = operaDriverConfig;
     }
 
@@ -49,8 +50,9 @@ public class OperaDriverManager extends CommonDriverManagerLifecycle {
 
     @Override
     public void stopService() {
-        if (service != null && service.isRunning())
+        if (service != null && service.isRunning()) {
             service.stop();
+        }
     }
 
     @Override
@@ -58,5 +60,4 @@ public class OperaDriverManager extends CommonDriverManagerLifecycle {
         driver = new OperaDriver(service, options);
         new CapabilitiesPrinter(driver).printCapabilities();
     }
-
 }

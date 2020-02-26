@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.Architecture;
 import io.github.bonigarcia.wdm.DriverManagerType;
 import io.github.bonigarcia.wdm.OperatingSystem;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.Setter;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -12,46 +14,23 @@ public class CommonDriverBinaryConfig implements DriverBinaryConfig {
 
     private WebDriverManager manager;
 
-    private String browserType;
-    private String driverBinaryFolder;
-    private String desiredDriverPlatform;
-    private String desiredDriverVersion;
-    private String desiredBinaryArchitecture;
-    private String targetBrowserPath;
-    private String binaryDownloadTimeout;
-    private String driverVersionAsJavaPreferenceTtl;
-    private String binariesRepositoryUrl;
-    private String gitHubTokenName;
-    private String getGitHubTokenSecret;
-    private String proxySocket;
-    private String proxyUser;
-    private String proxyPass;
-
-    public CommonDriverBinaryConfig(String browserType, String driverBinaryFolder, String desiredDriverPlatform,
-                                    String desiredDriverVersion, String desiredBinaryArchitecture,
-                                    String targetBrowserPath, String binaryDownloadTimeout,
-                                    String driverVersionAsJavaPreferenceTtl, String binariesRepositoryUrl,
-                                    String gitHubTokenName, String getGitHubTokenSecret,
-                                    String proxySocket, String proxyUser, String proxyPass) {
-
-        this.browserType = browserType;
-        this.driverBinaryFolder = driverBinaryFolder;
-        this.desiredDriverPlatform = desiredDriverPlatform;
-        this.desiredDriverVersion = desiredDriverVersion;
-        this.desiredBinaryArchitecture = desiredBinaryArchitecture;
-        this.targetBrowserPath = targetBrowserPath;
-        this.binaryDownloadTimeout = binaryDownloadTimeout;
-        this.driverVersionAsJavaPreferenceTtl = driverVersionAsJavaPreferenceTtl;
-        this.binariesRepositoryUrl = binariesRepositoryUrl;
-        this.gitHubTokenName = gitHubTokenName;
-        this.getGitHubTokenSecret = getGitHubTokenSecret;
-        this.proxySocket = proxySocket;
-        this.proxyUser = proxyUser;
-        this.proxyPass = proxyPass;
-    }
+    @Setter private String browserType;
+    @Setter private String driverBinaryFolder;
+    @Setter private String desiredDriverPlatform;
+    @Setter private String desiredDriverVersion;
+    @Setter private String desiredBinaryArchitecture;
+    @Setter private String targetBrowserPath;
+    @Setter private String binaryDownloadTimeout;
+    @Setter private String driverVersionAsJavaPreferenceTtl;
+    @Setter private String binariesRepositoryUrl;
+    @Setter private String gitHubTokenName;
+    @Setter private String getGitHubTokenSecret;
+    @Setter private String proxySocket;
+    @Setter private String proxyUser;
+    @Setter private String proxyPass;
 
     @Override
-    public void init(){
+    public void init() {
         manager = WebDriverManager.getInstance(DriverManagerType.valueOf(browserType.toUpperCase()))
                 .targetPath(driverBinaryFolder)
                 .operatingSystem(OperatingSystem.valueOf(desiredDriverPlatform))
@@ -69,25 +48,25 @@ public class CommonDriverBinaryConfig implements DriverBinaryConfig {
         manager.setup();
     }
 
-    public String getBinaryPath(){
+    @Override
+    public String getBinaryPath() {
         return manager.getBinaryPath();
     }
 
-    public String getDownloadedVersion(){
+    public String getDownloadedVersion() {
         return manager.getDownloadedVersion();
     }
 
-    public List<String> getAvailableVersions(){
+    public List<String> getAvailableVersions() {
         return manager.getVersions();
     }
 
-    public URL urlExceptionHandler(String url){
+    public URL urlExceptionHandler(final String url) {
         try {
             return new URL(url);
-        } catch (MalformedURLException ex){
+        } catch (final MalformedURLException ex) {
             System.out.println("URL is incorrect: " + url);
             return null;
         }
-
     }
 }

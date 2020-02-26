@@ -19,29 +19,29 @@ public class LoginPage extends AbstractPage {
     }
 
     @Step("Logging in with \"{userName} / {password}\"")
-    public HomePage login(String userName, String password){
-        if (isNotSafari()){
+    public DashboardPage login(final String userName, final String password) {
+        if (isNotSafari()) {
             return this.loginForAll(userName, password);
         } else {
             return this.loginForSafari(userName, password);
         }
     }
 
-    private HomePage loginForSafari(String username, String password){
+    private DashboardPage loginForSafari(final String username, final String password) {
         driver.executeScript("document.querySelector(\"input[type='text']\").click()");
         objectRepository.getUsername().sendKeys(username);
         driver.executeScript("document.querySelector(\"input[type='password']\").click()");
         objectRepository.getPassword().sendKeys(password);
         driver.executeScript("document.querySelector(\"input[type='submit']\").click()");
-        return new HomePage();
+        return new DashboardPage();
     }
 
-    private HomePage loginForAll(String username, String password){
+    private DashboardPage loginForAll(final String username, final String password) {
         objectRepository.getUsername().click();
         objectRepository.getUsername().sendKeys(username);
         objectRepository.getPassword().click();
         objectRepository.getPassword().sendKeys(password);
         objectRepository.getButton().click();
-        return new HomePage();
+        return new DashboardPage();
     }
 }

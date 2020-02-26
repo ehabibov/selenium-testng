@@ -5,6 +5,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+
 import java.util.Set;
 
 public class CapabilitiesPrinter {
@@ -13,15 +14,15 @@ public class CapabilitiesPrinter {
 
     private WebDriver driver;
 
-    public CapabilitiesPrinter(WebDriver driver) {
+    public CapabilitiesPrinter(final WebDriver driver) {
         this.driver = driver;
     }
 
-    public void printCapabilities(){
+    public void printCapabilities() {
         Capabilities capabilities = ((RemoteWebDriver) this.driver).getCapabilities();
-        String output="Capabilities:\n";
+        String output = "Capabilities:\n";
         Set<String> capabilityNames = capabilities.getCapabilityNames();
-        for (String capabilityName : capabilityNames){
+        for (String capabilityName : capabilityNames) {
             String capabilityValue = capabilities.getCapability(capabilityName).toString();
             String capabilityOutput = String.format("\t%s : %s\n", capabilityName, capabilityValue);
             output = output.concat(capabilityOutput);

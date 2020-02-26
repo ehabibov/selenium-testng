@@ -4,6 +4,7 @@ import org.openqa.selenium.edge.ChromiumEdgeDriverService;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class EdgeDriverManager extends CommonDriverManagerLifecycle {
     private EdgeDriverConfig config;
     private EdgeOptions options;
 
-    public void setEdgeDriverConfig(EdgeDriverConfig edgeDriverConfig) {
+    public void setEdgeDriverConfig(final EdgeDriverConfig edgeDriverConfig) {
         this.config = edgeDriverConfig;
     }
 
@@ -51,8 +52,9 @@ public class EdgeDriverManager extends CommonDriverManagerLifecycle {
 
     @Override
     public void stopService() {
-        if (service != null && service.isRunning())
+        if (service != null && service.isRunning()) {
             service.stop();
+        }
     }
 
     @Override

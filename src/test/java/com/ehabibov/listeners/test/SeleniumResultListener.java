@@ -7,62 +7,62 @@ import org.testng.internal.IResultListener;
 public class SeleniumResultListener implements IResultListener {
 
     @Override
-    public void onConfigurationSuccess(ITestResult itr) {
+    public void onConfigurationSuccess(final ITestResult itr) {
 
     }
 
     @Override
-    public void onConfigurationFailure(ITestResult itr) {
+    public void onConfigurationFailure(final ITestResult itr) {
 
     }
 
     @Override
-    public void onConfigurationSkip(ITestResult itr) {
+    public void onConfigurationSkip(final ITestResult itr) {
 
     }
 
     @Override
-    public void beforeConfiguration(ITestResult tr) {
+    public void beforeConfiguration(final ITestResult tr) {
 
     }
 
     @Override
-    public void onTestStart(ITestResult result) {
+    public void onTestStart(final ITestResult result) {
 
     }
 
     @Override
-    public void onTestSuccess(ITestResult result) {
+    public void onTestSuccess(final ITestResult result) {
 
     }
 
     @Override
-    public void onTestFailure(ITestResult result) {
+    public void onTestFailure(final ITestResult result) {
 
     }
 
     @Override
-    public void onTestSkipped(ITestResult result) {
+    public void onTestSkipped(final ITestResult result) {
 
     }
 
     @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+    public void onTestFailedButWithinSuccessPercentage(final ITestResult result) {
 
     }
 
     @Override
-    public void onTestFailedWithTimeout(ITestResult result) {
+    public void onTestFailedWithTimeout(final ITestResult result) {
 
     }
 
     @Override
-    public void onStart(ITestContext context) {
+    public void onStart(final ITestContext context) {
 
     }
 
     @Override
-    public void onFinish(ITestContext context) {
+    public void onFinish(final ITestContext context) {
 
     }
 }

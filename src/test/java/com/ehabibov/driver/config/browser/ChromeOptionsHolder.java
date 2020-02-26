@@ -4,6 +4,7 @@ import org.openqa.selenium.chrome.ChromeOptions;;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.Proxy;
+
 import java.util.stream.Collectors;
 import java.util.List;
 import java.io.File;
@@ -12,15 +13,15 @@ import com.ehabibov.driver.config.OptionsHolder;
 
 public class ChromeOptionsHolder implements OptionsHolder {
 
-    ChromeOptions options = new ChromeOptions();
+    private ChromeOptions options = new ChromeOptions();
 
     @Override
     public ChromeOptions getOptions() {
         return this.options;
     }
 
-    public void setExtensions(List<String> extensionPaths){
-        if (extensionPaths != null){
+    public void setExtensions(final List<String> extensionPaths) {
+        if (extensionPaths != null) {
             List<File> extensionFiles = extensionPaths.stream()
                     .filter(path -> !path.isEmpty())
                     .map(File::new)
@@ -29,11 +30,11 @@ public class ChromeOptionsHolder implements OptionsHolder {
         }
     }
 
-    public void setAcceptInsecureCerts(boolean isAcceptInsecureCerts){
+    public void setAcceptInsecureCerts(final boolean isAcceptInsecureCerts) {
         options.setAcceptInsecureCerts(isAcceptInsecureCerts);
     }
 
-    public void setCapabilities(List<String> capabilities){
+    public void setCapabilities(final List<String> capabilities) {
         if (capabilities != null) {
             capabilities.stream()
                     .filter(cap -> !cap.isEmpty())
@@ -42,23 +43,23 @@ public class ChromeOptionsHolder implements OptionsHolder {
         }
     }
 
-    public void setHeadless(boolean isHeadless){
+    public void setHeadless(final boolean isHeadless) {
         options.setHeadless(isHeadless);
     }
 
-    public void setStrictFileInteractability(boolean isStrictFileInteractability){
+    public void setStrictFileInteractability(final boolean isStrictFileInteractability) {
         options.setStrictFileInteractability(isStrictFileInteractability);
     }
 
-    public void setPageLoadStrategy(String strategy){
+    public void setPageLoadStrategy(final String strategy) {
         options.setPageLoadStrategy(PageLoadStrategy.valueOf(strategy.toUpperCase()));
     }
 
-    public void setUnhandledPromptBehaviour(String unhandledPromptBehaviour){
+    public void setUnhandledPromptBehaviour(final String unhandledPromptBehaviour) {
         options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.valueOf(unhandledPromptBehaviour.toUpperCase()));
     }
 
-    public void setArguments(List<String> arguments){
+    public void setArguments(final List<String> arguments) {
         if (arguments != null) {
             List<String> filteredArguments = arguments.stream()
                     .filter(path -> !path.isEmpty()).collect(Collectors.toList());
@@ -66,7 +67,7 @@ public class ChromeOptionsHolder implements OptionsHolder {
         }
     }
 
-    public void setProxy(Proxy proxy){
+    public void setProxy(final Proxy proxy) {
         options.setProxy(proxy);
     }
 }

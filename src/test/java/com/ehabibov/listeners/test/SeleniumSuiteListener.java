@@ -14,14 +14,14 @@ public class SeleniumSuiteListener implements ISuiteListener {
     private static final Logger log = LoggerFactory.getLogger(SeleniumSuiteListener.class);
 
     @Override
-    public void onStart(ISuite suiteContext) {
+    public void onStart(final ISuite suiteContext) {
         log.info("suite onStart");
         WebDriver driver = DriverManagerHolder.Driver.getDriver().register(new DriverListener());
         driver.manage().window().maximize();
     }
 
     @Override
-    public void onFinish(ISuite suiteContext) {
+    public void onFinish(final ISuite suiteContext) {
         log.info("suite onFinish");
         DriverManagerHolder.Driver.quitDriver();
     }

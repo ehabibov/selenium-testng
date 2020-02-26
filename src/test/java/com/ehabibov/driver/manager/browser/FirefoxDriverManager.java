@@ -4,6 +4,7 @@ import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class FirefoxDriverManager extends CommonDriverManagerLifecycle {
     private FirefoxDriverConfig config;
     private FirefoxOptions options;
 
-    public void setFirefoxDriverConfig(FirefoxDriverConfig firefoxDriverConfig) {
+    public void setFirefoxDriverConfig(final FirefoxDriverConfig firefoxDriverConfig) {
         this.config = firefoxDriverConfig;
     }
 
@@ -48,8 +49,9 @@ public class FirefoxDriverManager extends CommonDriverManagerLifecycle {
 
     @Override
     public void stopService() {
-        if (service != null && service.isRunning())
+        if (service != null && service.isRunning()) {
             service.stop();
+        }
     }
 
     @Override
@@ -57,5 +59,4 @@ public class FirefoxDriverManager extends CommonDriverManagerLifecycle {
         driver = new FirefoxDriver(service, options);
         new CapabilitiesPrinter(driver).printCapabilities();
     }
-
 }

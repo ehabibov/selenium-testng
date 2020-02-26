@@ -3,6 +3,7 @@ package com.ehabibov.driver.manager.browser;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.Capabilities;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,8 +46,9 @@ public class ChromeDriverManager extends CommonDriverManagerLifecycle {
 
     @Override
     public void stopService() {
-        if (service != null && service.isRunning())
+        if (service != null && service.isRunning()) {
             service.stop();
+        }
     }
 
     @Override

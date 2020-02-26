@@ -2,6 +2,7 @@ package com.ehabibov.driver.config.browser;
 
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.Proxy;
+
 import java.util.List;
 import java.io.File;
 
@@ -15,7 +16,7 @@ public class EdgeDriverConfig implements DriverConfig {
     private boolean acceptInsecureCerts;
     private Proxy proxy;
 
-    public void initOptions(){
+    public void initOptions() {
         options = new EdgeOptions();
         /*options.addArguments(args);
         options.addEncodedExtensions();
@@ -36,7 +37,7 @@ public class EdgeDriverConfig implements DriverConfig {
         return this.options;
     }
 
-    public Proxy setProxy(){
+    public Proxy setProxy() {
         /*proxy = new Proxy();
         proxy.setAutodetect();
         proxy.setFtpProxy();
@@ -51,11 +52,11 @@ public class EdgeDriverConfig implements DriverConfig {
         return proxy;
     }
 
-    public void setPort(String port) {
+    public void setPort(final String port) {
         this.port = port;
     }
 
-    public void setArgs(List<String> args) {
+    public void setArgs(final List<String> args) {
         this.args = args;
     }
 }

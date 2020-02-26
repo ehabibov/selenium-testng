@@ -11,6 +11,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+
 import java.time.Duration;
 
 import com.ehabibov.context.ApplicationContextSingleton;
@@ -28,30 +29,30 @@ public abstract class AbstractPage {
     protected DriverManagerLifecycle manager;
     protected EventFiringWebDriver driver;
 
-    public AbstractPage(){
+    public AbstractPage() {
         this.initDriver();
     }
 
-    protected void initDriver(){
+    protected void initDriver() {
         this.context = ApplicationContextSingleton.getContext();
         this.appConfig = context.getBean(ApplicationConfig.class);
         this.driver = DriverManagerHolder.Driver.getDriver();
     }
 
-    void initLocators(LocatorRepository locatorRepository){
+    protected void initLocators(final LocatorRepository locatorRepository) {
         PageFactory.initElements(driver, locatorRepository);
     }
 
-    void waitForTrait(LocatorRepository locatorRepository, int timeout){
+    protected void waitForTrait(final LocatorRepository locatorRepository, final int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.presenceOfElementLocated(locatorRepository.getTrait()));
     }
 
-    void waitForTrait(LocatorRepository locatorRepository){
+    protected void waitForTrait(final LocatorRepository locatorRepository) {
         waitForTrait(locatorRepository, 5);
     }
 
-    protected <T extends LocatorRepository> T setObjectRepository(Class<T> type) {
+    protected <T extends LocatorRepository> T setObjectRepository(final Class<T> type) {
         T instance = null;
         try {
             instance =  type.newInstance();
@@ -61,23 +62,23 @@ public abstract class AbstractPage {
         return instance;
     }
 
-    protected String getAppUrl(){
+    protected String getAppUrl() {
         return String.format("%s:%s", appConfig.getApplicationHost(), appConfig.getApplicationPort());
     }
 
-    protected String getBrowser(){
+    protected String getBrowser() {
         return this.appConfig.getBrowserType();
     }
 
-    public boolean isSafari(){
+    public boolean isSafari() {
         return this.getBrowser().equalsIgnoreCase("safari");
     }
 
-    public boolean isNotSafari(){
+    public boolean isNotSafari() {
         return !this.isSafari();
     }
 
-    public void waitForElementExist(By locator, long timeout, long interval){
+    public void waitForElementExist(final By locator, final long timeout, final long interval) {
         String locatorAddress = this.getLocatorAddress(locator);
         String message = String.format("WebElement not found [%s]", locatorAddress);
         FluentWait<WebDriver> wait = new FluentWait<>(driver);
@@ -88,7 +89,7 @@ public abstract class AbstractPage {
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    private String getLocatorAddress(By locator) {
+    private String getLocatorAddress(final By locator) {
         String locatorAddress = "[not init]";
         if (locator instanceof By.ByCssSelector) {
             locatorAddress = ((By.ByCssSelector) locator).toString();

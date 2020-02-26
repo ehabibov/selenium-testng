@@ -7,13 +7,13 @@ import io.qameta.allure.Description;
 
 import com.ehabibov.listeners.test.SeleniumSuiteListener;
 import com.ehabibov.listeners.test.SeleniumTestListener;
-import com.ehabibov.pageobjects.HomePage;
+import com.ehabibov.pageobjects.DashboardPage;
 import com.ehabibov.pageobjects.LoginPage;
 import com.ehabibov.pageobjects.SystemUsersPage;
 import com.ehabibov.pageobjects.AddUserPage;
 import com.ehabibov.entities.SystemUser;
 
-import static com.ehabibov.tests.CustomAsserts.*;
+import static com.ehabibov.util.CustomAsserts.*;
 
 @Listeners({SeleniumSuiteListener.class, SeleniumTestListener.class})
 public class CreateUserTest {
@@ -21,9 +21,9 @@ public class CreateUserTest {
     @Test
     @Description("Create general user account")
     @Parameters({"username", "password"})
-    public void createUserAccount(String login, String password){
-        HomePage homePage = new LoginPage().login(login,password);
-        SystemUsersPage systemUsersPage = homePage.navigateToSystemUsersPage();
+    public void createUserAccount(final String login, final String password) {
+        DashboardPage dashboardPage = new LoginPage().login(login, password);
+        SystemUsersPage systemUsersPage = dashboardPage.navigateToSystemUsersPage();
         AddUserPage addUserPage = systemUsersPage.navigateToAddUserPage();
         SystemUser newSystemUser = SystemUser.builder()
                 .userName("userLastName").userRole("ESS").employeeName("User Last Name")
@@ -31,6 +31,6 @@ public class CreateUserTest {
         systemUsersPage = addUserPage.registerUser(newSystemUser);
         SystemUser registeredUser = systemUsersPage.getUserInfoFromTable(newSystemUser.getUserName());
 
-        assertObjectsEqualIgnoringFields(registeredUser, newSystemUser, SystemUser.Fields.password);
+        assertEqualIgnoringFields(registeredUser, newSystemUser, SystemUser.Fields.password);
     }
 }

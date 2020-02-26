@@ -3,6 +3,9 @@ package com.ehabibov.driver.manager.browser;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.Capabilities;
 
+import java.net.URL;
+import java.net.MalformedURLException;
+
 import com.ehabibov.driver.manager.RemoteDriverManagerLifecycle;
 import com.ehabibov.driver.config.OptionsFetcher;
 import com.ehabibov.driver.config.browser.RemoteOptionsHolder;
@@ -23,11 +26,11 @@ public class RemoteDriverManager extends RemoteDriverManagerLifecycle {
         new CapabilitiesPrinter(driver).printCapabilities();
     }
 
-    private java.net.URL getURL() {
-        java.net.URL url = null;
+    private URL getURL() {
+        URL url = null;
         try {
-            url = new java.net.URL("http://localhost:4444/wd/hub");
-        } catch (java.net.MalformedURLException e) {
+            url = new URL("http://localhost:4444/wd/hub");
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;

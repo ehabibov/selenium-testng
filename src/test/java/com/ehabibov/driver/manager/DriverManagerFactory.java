@@ -9,7 +9,7 @@ import com.ehabibov.driver.DriverType;
 
 public class DriverManagerFactory implements FactoryBean<DriverManagerLifecycle> {
 
-    public DriverType driverType;
+    private DriverType driverType;
 
     @Override
     public DriverManagerLifecycle getObject() {
@@ -50,7 +50,7 @@ public class DriverManagerFactory implements FactoryBean<DriverManagerLifecycle>
         return true;
     }
 
-    public void setDriverType(String driverType) {
+    public void setDriverType(final String driverType) {
         this.driverType = DriverType.valueOf(driverType.toUpperCase());
     }
 

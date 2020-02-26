@@ -20,7 +20,7 @@ public class AddUserPage extends AbstractPage {
     }
 
     @Step("Register new user")
-    public SystemUsersPage registerUser(final SystemUser user){
+    public SystemUsersPage registerUser(final SystemUser user) {
         Select userRoleSelector = new Select(objectRepository.getUserRoleDropdown());
         userRoleSelector.selectByVisibleText(user.getUserRole());
         objectRepository.getEmployeeNameField().sendKeys(user.getEmployeeName());

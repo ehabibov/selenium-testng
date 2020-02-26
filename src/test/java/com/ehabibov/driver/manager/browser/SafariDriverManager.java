@@ -3,6 +3,7 @@ package com.ehabibov.driver.manager.browser;
 import org.openqa.selenium.safari.SafariDriverService;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public class SafariDriverManager extends CommonDriverManagerLifecycle {
     private SafariDriverConfig config;
     private SafariOptions options;
 
-    public void setSafariDriverConfig(SafariDriverConfig safariDriverConfig) {
+    public void setSafariDriverConfig(final SafariDriverConfig safariDriverConfig) {
         this.config = safariDriverConfig;
     }
 
@@ -48,8 +49,9 @@ public class SafariDriverManager extends CommonDriverManagerLifecycle {
 
     @Override
     public void stopService() {
-        if (service != null && service.isRunning())
+        if (service != null && service.isRunning()) {
             service.stop();
+        }
     }
 
     @Override

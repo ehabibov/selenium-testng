@@ -4,7 +4,7 @@ public class SafariDriverBinaryConfig implements DriverBinaryConfig {
 
     private String driverBinaryFolder;
 
-    public SafariDriverBinaryConfig(String driverBinaryFolder) {
+    public SafariDriverBinaryConfig(final String driverBinaryFolder) {
         this.driverBinaryFolder = driverBinaryFolder;
     }
 

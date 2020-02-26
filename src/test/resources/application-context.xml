@@ -36,20 +36,20 @@
     <bean id="remoteDriverManager" class="com.ehabibov.driver.manager.browser.RemoteDriverManager"/>
 
     <bean id="commonDriverBinaryConfig" class="com.ehabibov.driver.binary.CommonDriverBinaryConfig"
-          c:browserType="${browser.type}"
-          c:driverBinaryFolder="${browser.binary.folder.path}"
-          c:desiredDriverVersion="${browser.binary.target.version:nil}"
-          c:desiredDriverPlatform="${browser.binary.target.platform:LINUX}"
-          c:desiredBinaryArchitecture="${browser.binary.target.architecture:DEFAULT}"
-          c:targetBrowserPath="${browser.binary.browser.path:nil}"
-          c:binaryDownloadTimeout="${browser.binary.download.timeout.seconds:10}"
-          c:driverVersionAsJavaPreferenceTtl="${browser.binary.jvm.preference.ttl.seconds:3600}"
-          c:binariesRepositoryUrl="${browser.binary.custom.repository.url:nil}"
-          c:gitHubTokenName="${browser.binary.download.github.token.name:nil}"
-          c:getGitHubTokenSecret="${browser.binary.download.github.token.secret:nil}"
-          c:proxySocket="${browser.binary.download.proxy.socket:nil}"
-          c:proxyUser="${browser.binary.download.proxy.user:nil}"
-          c:proxyPass="${browser.binary.download.proxy.pass:nil}"/>
+          p:browserType="${browser.type}"
+          p:driverBinaryFolder="${browser.binary.folder.path}"
+          p:desiredDriverVersion="${browser.binary.target.version:nil}"
+          p:desiredDriverPlatform="${browser.binary.target.platform:LINUX}"
+          p:desiredBinaryArchitecture="${browser.binary.target.architecture:DEFAULT}"
+          p:targetBrowserPath="${browser.binary.browser.path:nil}"
+          p:binaryDownloadTimeout="${browser.binary.download.timeout.seconds:10}"
+          p:driverVersionAsJavaPreferenceTtl="${browser.binary.jvm.preference.ttl.seconds:3600}"
+          p:binariesRepositoryUrl="${browser.binary.custom.repository.url:nil}"
+          p:gitHubTokenName="${browser.binary.download.github.token.name:nil}"
+          p:getGitHubTokenSecret="${browser.binary.download.github.token.secret:nil}"
+          p:proxySocket="${browser.binary.download.proxy.socket:nil}"
+          p:proxyUser="${browser.binary.download.proxy.user:nil}"
+          p:proxyPass="${browser.binary.download.proxy.pass:nil}"/>
 
     <bean id="safariDriverBinaryConfig" class="com.ehabibov.driver.binary.SafariDriverBinaryConfig"
           c:driverBinaryFolder="${browser.binary.folder.path.safari}"/>

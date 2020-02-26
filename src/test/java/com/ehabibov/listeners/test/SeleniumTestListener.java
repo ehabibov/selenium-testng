@@ -21,52 +21,52 @@ public class SeleniumTestListener implements ITestListener {
 
     private static final Logger log = LoggerFactory.getLogger(SeleniumTestListener.class);
 
-    protected WebDriver driver;
+    private WebDriver driver;
 
     @Override
-    public void onStart(ITestContext context) {
+    public void onStart(final ITestContext context) {
         log.info("test onStart");
         this.driver = DriverManagerHolder.Driver.getDriver();
     }
 
     @Override
-    public void onTestStart(ITestResult result) {
+    public void onTestStart(final ITestResult result) {
         log.info("test onTestStart");
     }
 
     @Override
-    public void onTestSuccess(ITestResult result) {
+    public void onTestSuccess(final ITestResult result) {
         log.info("test onTestSuccess");
     }
 
     @Override
-    public void onTestSkipped(ITestResult result) {
+    public void onTestSkipped(final ITestResult result) {
         log.info("test onTestSkipped");
     }
 
     @Override
-    public void onTestFailure(ITestResult result) {
+    public void onTestFailure(final ITestResult result) {
         log.info("test onTestFailure");
         this.takeScreenshot();
         this.takePageSource();
     }
 
     @Override
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+    public void onTestFailedButWithinSuccessPercentage(final ITestResult result) {
         log.info("test onTestFailedButWithinSuccessPercentage");
     }
 
     @Override
-    public void onTestFailedWithTimeout(ITestResult result) {
+    public void onTestFailedWithTimeout(final ITestResult result) {
         log.info("test onTestFailedWithTimeout");
     }
 
     @Override
-    public void onFinish(ITestContext context) {
+    public void onFinish(final ITestContext context) {
         log.info("test onFinish");
     }
 
-    private void takeScreenshot(){
+    private void takeScreenshot() {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
             InputStream is = new FileInputStream(screenshot);
@@ -77,7 +77,7 @@ public class SeleniumTestListener implements ITestListener {
         }
     }
 
-    private void takePageSource(){
+    private void takePageSource() {
         String pageSource = driver.getPageSource();
         Allure.addAttachment("Page source", "text/plain", pageSource, "txt");
         log.info("Saved page source");

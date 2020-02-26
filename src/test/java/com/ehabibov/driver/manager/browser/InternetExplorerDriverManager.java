@@ -4,6 +4,7 @@ import org.openqa.selenium.ie.InternetExplorerDriverLogLevel;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class InternetExplorerDriverManager extends CommonDriverManagerLifecycle 
     private InternetExplorerDriverConfig config;
     private InternetExplorerOptions options;
 
-    public void setInternetExplorerDriverConfig(InternetExplorerDriverConfig internetExplorerDriverConfig) {
+    public void setInternetExplorerDriverConfig(final InternetExplorerDriverConfig internetExplorerDriverConfig) {
         this.config = internetExplorerDriverConfig;
     }
 
@@ -52,8 +53,9 @@ public class InternetExplorerDriverManager extends CommonDriverManagerLifecycle 
 
     @Override
     public void stopService() {
-        if (service != null && service.isRunning())
+        if (service != null && service.isRunning()) {
             service.stop();
+        }
     }
 
     @Override
@@ -61,5 +63,4 @@ public class InternetExplorerDriverManager extends CommonDriverManagerLifecycle 
         driver = new InternetExplorerDriver(service, options);
         new CapabilitiesPrinter(driver).printCapabilities();
     }
-
 }

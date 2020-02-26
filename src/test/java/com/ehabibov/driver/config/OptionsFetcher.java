@@ -7,12 +7,11 @@ public class OptionsFetcher {
 
     private OptionsHolder optionsHolder;
 
-    public <T extends OptionsHolder> OptionsFetcher(Class<T> clazz) {
+    public <T extends OptionsHolder> OptionsFetcher(final Class<T> clazz) {
         this.optionsHolder = ApplicationContextSingleton.getContext().getBean(clazz);
     }
 
     public Capabilities getOptions() {
         return optionsHolder.getOptions();
     }
-
 }
