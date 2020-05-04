@@ -9,6 +9,5 @@ public class ApplicationConfig {
     private int applicationPort;
     private String browserType;
     private boolean remoteDriver;
-    private String remoteDriverUrl;
 
 }
