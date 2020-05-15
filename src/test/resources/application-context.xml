@@ -33,7 +33,8 @@
           p:driverType="${browser.type}"/>
 
     <bean id="remoteDriverManager" class="com.ehabibov.driver.manager.browser.RemoteDriverManager"
-          p:hubUrl="${remote.driver.url:http://localhost:4444/wd/hub}"/>
+          p:host="${remote.driver.host:localhost}"
+          p:port="${remote.driver.port:4444}"/>
 
     <bean id="commonDriverBinaryConfig" class="com.ehabibov.driver.binary.CommonDriverBinaryConfig"
           p:browserType="${browser.type}"

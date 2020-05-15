@@ -15,7 +15,8 @@ public class RemoteDriverManager extends RemoteDriverManagerLifecycle {
 
     private OptionsFetcher optionsFetcher = new OptionsFetcher(RemoteOptionsHolder.class);
     private Capabilities capabilities;
-    private String hubUrl;
+    private String host;
+    private String port;
 
     @Override
     protected void prepareService() {
@@ -29,15 +30,20 @@ public class RemoteDriverManager extends RemoteDriverManagerLifecycle {
 
     private URL getURL() {
         URL url = null;
+        String urlPattern = "http://%s:%s/wd/hub";
         try {
-            url = new URL(hubUrl);
+            url = new URL(String.format(urlPattern, host, port));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
     }
 
-    public void setHubUrl(String hubUrl) {
-        this.hubUrl = hubUrl;
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
 }
