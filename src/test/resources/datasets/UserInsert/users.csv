@@ -1,0 +1,3 @@
+EMP_NUMBER,EMP_FNAME,EMP_LNAME,EMP_MNAME,USER_ID,USER_RID,UNAME,UPASSWD
+77,fname,lname,mname,100,1,userName,passwd
+78,fname,lname,mname,101,1,userName,passwd

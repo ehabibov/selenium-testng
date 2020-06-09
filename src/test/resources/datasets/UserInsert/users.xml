@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset SYSTEM "src/test/resources/datasets/schema.dtd">
+
+<dataset>
+    <hs_hr_employee emp_number="[EMP_NUMBER]" emp_firstname="[EMP_FNAME]" emp_lastname="[EMP_LNAME]" emp_middle_name="[EMP_MNAME]"/>
+    <ohrm_user id="[USER_ID]" user_role_id="[USER_RID]" emp_number="[EMP_NUMBER]" user_name="[UNAME]" user_password="[UPASSWD]" deleted="0" status="1"
+               date_entered="2001-12-11 13:15:00 " date_modified="2001-12-11 15:15:00" modified_user_id="214" created_by="1"/>
+</dataset>
